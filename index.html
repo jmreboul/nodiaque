@@ -88,6 +88,19 @@
     box-shadow: 0 1px 4px rgba(0,0,0,.07);
     text-align: center;
   }
+
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,30,0.85);backdrop-filter:blur(4px);z-index:1000;align-items:center;justify-content:center;}
+  .modal-overlay.open{display:flex;}
+  .modal-box{background:linear-gradient(135deg,#0a0a30 0%,#181860 100%);border:1px solid rgba(100,140,255,0.4);border-radius:14px;padding:22px 26px;max-width:min(500px,92vw);width:100%;color:#dde;box-shadow:0 8px 40px rgba(0,0,80,0.8);position:relative;font-family:'Lato',sans-serif;}
+  .modal-close{position:absolute;top:10px;right:14px;font-size:1.4rem;color:#aabbdd;cursor:pointer;background:none;border:none;}
+  .modal-close:hover{color:white;}
+  .modal-title{font-family:'Cinzel',serif;font-size:1.15rem;font-weight:700;color:#ff9999;margin-bottom:3px;}
+  .modal-month{font-size:.78rem;color:#99aacc;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
+  .modal-defluence{font-size:.85rem;color:#ffcc88;margin-bottom:10px;font-style:italic;}
+  .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px 14px;margin-bottom:12px;font-size:.8rem;}
+  .modal-grid span{color:#aabbdd;}.modal-grid strong{color:#ddeeff;}
+  .modal-texte{font-size:.8rem;color:#ccd;line-height:1.65;border-top:1px solid rgba(100,140,255,0.2);padding-top:10px;margin-bottom:10px;}
+  .modal-affinites{font-size:.76rem;color:#99bbdd;}
 </style>
 </head>
 <body>
@@ -112,6 +125,18 @@
   <div class="date-cartouche" id="dateCartouche">—</div>
 </div>
 
+
+<div class="modal-overlay" id="signModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('signModal').classList.remove('open')">&times;</button>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-month" id="modalMonth"></div>
+    <div class="modal-defluence" id="modalDefluence"></div>
+    <div class="modal-grid" id="modalGrid"></div>
+    <div class="modal-texte" id="modalTexte"></div>
+    <div class="modal-affinites" id="modalAffinites"></div>
+  </div>
+</div>
 <div class="chart-wrap">
   <svg id="chart" viewBox="-480 -480 960 960" xmlns="http://www.w3.org/2000/svg"></svg>
 </div>
@@ -439,11 +464,13 @@ function drawBase(svg){
   const PILL_W = SECTORS.map(s => Math.max(s.length * 8.2 + 18, 52));
   for(let i=0;i<12;i++){
     const a=i*30+15, lp=polar(RS+6,a), rot=a>90&&a<270?a+180:a;
-    const grp=el('g',{transform:`rotate(${rot},${lp.x},${lp.y})`});
+    const grp=el('g',{transform:`rotate(${rot},${lp.x},${lp.y})`,
+      style:'cursor:pointer'});
+    grp.addEventListener('click',()=>openSignModal(i));
     const pw=PILL_W[i], ph=20, pr=10;
     grp.appendChild(el('rect',{
       x:lp.x-pw/2, y:lp.y-ph/2, width:pw, height:ph, rx:pr, ry:pr,
-      fill:'rgba(15,15,100,0.90)', opacity:'0.82'
+      fill:'rgba(15,15,100,0.90)', opacity:'0.95'
     }));
     grp.appendChild(tx(SECTORS[i],{
       x:lp.x, y:lp.y,
@@ -581,6 +608,24 @@ function drawPlanets(svg, results, d,m,y,h,mn){
 }
 
 // ── Main ───────────────────────────────────────────────────────
+const SIGN_DATA = [{"name": "1 Licorne", "mois": "Janvier", "genre": "Féminin", "element": "Cristal", "astre": "Saturne", "mineral": "Quartz", "defluence": "Le Défi", "fondamental": "Penser", "couleur": "Transparent", "texte": "Licorne cherche à se distinguer et affirmer sa personnalité. Indépendante dans son raisonnement, originale, elle est passionnée par ce qui semble impossible à conquérir. Volonté, ardeur, ambition et courage sont ses caractères principaux. Penseur, chercheur, philosophe de premier plan.", "affinites": "Pentacle (Mai), Caprus (Septembre)", "oppose": "Stella (Juillet)"}, {"name": "2 Quadran", "mois": "Février", "genre": "Masculin", "element": "Pierre", "astre": "Pluton", "mineral": "Améthyste", "defluence": "L'Immobilisme", "fondamental": "Être", "couleur": "Violet", "texte": "Quadran aime le foyer, la famille, le passé, l'histoire, les institutions. Ses valeurs sont traditionnelles : ordre, tradition, bienfaisance. Peu actif, sinon pour défendre les valeurs traditionnelles. Préfère les métiers liés à l'étude du passé, l'archéologie, la religion.", "affinites": "Neptunus (Juin), Coq (Octobre)", "oppose": "Lynx (Août)"}, {"name": "3 Serpent", "mois": "Mars", "genre": "Féminin", "element": "Parole", "astre": "Vénus", "mineral": "Jaspe", "defluence": "La Séduction", "fondamental": "Agir", "couleur": "Vert", "texte": "Le Serpent est doué de ruse et de fascination, très indépendant. Grande facilité à s'exprimer. Il s'intéresse aux relations sociales, aux amitiés, aux inventions. Bon négociateur de premier plan, il aura du mal à se stabiliser affectivement.", "affinites": "Stella (Juillet), Lynx (Août)", "oppose": "—"}, {"name": "4 Buffle", "mois": "Avril", "genre": "Masculin", "element": "Terre", "astre": "Jupiter", "mineral": "Ambre", "defluence": "La Persévérance", "fondamental": "Réaliser", "couleur": "Jaune", "texte": "Le Buffle est un tâcheron. Sa force, puissance et patience le mènent loin. Il aime construire, réaliser des tâches difficiles. Réfractaire aux changements, il progresse sûrement. Négocier avec lui signifie souvent se heurter à un véritable mur.", "affinites": "Quadran (Fév.), Pentacle (Mai)", "oppose": "Coq (Octobre)"}, {"name": "5 Pentacle", "mois": "Mai", "genre": "Féminin", "element": "Métal", "astre": "Uranus", "mineral": "Mercurium", "defluence": "La Stabilité", "fondamental": "Penser", "couleur": "Argent", "texte": "Signe de la pondération, le Pentacle aime réfléchir, il est calme, presque Zen. Esprit brillant, sa pudeur l'empêche de se mettre en avant. Attiré par les métiers de la recherche, de la philosophie. Fera un excellent professeur.", "affinites": "Lynx (Août), Neptunus (Juin)", "oppose": "Equus (Novembre)"}, {"name": "6 Neptunus", "mois": "Juin", "genre": "Masculin", "element": "Eau", "astre": "Neptune", "mineral": "Jade", "defluence": "La Fécondité", "fondamental": "Être", "couleur": "Vert", "texte": "Neptunus est très ouvert, inventif, sensible, impatient. Poète, créateur doué d'une forte sensibilité. Se laisse aller vers les voyages autant de l'esprit que du corps. Naturellement attiré par le mysticisme, l'ésotérisme, la voyance. Humaniste.", "affinites": "Quadran (Fév.), Pentacle (Mai)", "oppose": "—"}, {"name": "7 Stella", "mois": "Juillet", "genre": "Féminin", "element": "Sable", "astre": "Astérydes", "mineral": "Agathe", "defluence": "La Mobilité", "fondamental": "Agir", "couleur": "Beige", "texte": "Stella est caractérisé par la flexibilité, l'adaptabilité et la dualité. Excentrique, toujours en mouvement. Être de communication, attiré par le commerce, le futur, la science-fiction. Stella est souvent le signe des génies et des excentriques.", "affinites": "Coq (Oct.), Lynx (Août)", "oppose": "Licorne (Janvier)"}, {"name": "8 Lynx", "mois": "Août", "genre": "Masculin", "element": "Verre", "astre": "Lune", "mineral": "Émeraude", "defluence": "L'Acuité", "fondamental": "Réaliser", "couleur": "Vert forêt", "texte": "Le Lynx devine tout, il voit tout. Perspicace, il observe, réfléchit, aime les secrets et les mystères. Son esprit critique combat son anxiété naturelle. Toujours en éveil, prêt à bondir. Attiré par les sciences occultes, la magie, les pouvoirs secrets.", "affinites": "Aigle (Déc.), Buffle (Avril)", "oppose": "Quadran (Février)"}, {"name": "9 Caprus", "mois": "Septembre", "genre": "Féminin", "element": "Bois", "astre": "Terra", "mineral": "Jais", "defluence": "L'Équité", "fondamental": "Réaliser", "couleur": "Ébène", "texte": "Caprus a le pas très sûr, méfiante et prudente, elle respire l'harmonie, la justice et la vérité. Sa Défluence l'amène à toujours défendre la veuve et l'orphelin. Elle aimera les métiers de la justice, la politique, l'écologie ou les grandes causes.", "affinites": "Licorne (Jan.), Buffle (Avril)", "oppose": "—"}, {"name": "10 Coq", "mois": "Octobre", "genre": "Masculin", "element": "Lumière", "astre": "Soleil", "mineral": "Cornaline", "defluence": "La Naissance", "fondamental": "Être", "couleur": "Orange", "texte": "Le Coq est fier, il aime occuper le devant de la scène. Sa Défluence le porte vers tout ce qui est nouveau, remarquable, rayonnant. Il aimera les carrières médiatiques, la politique. Facilement artiste, désireux de s'exprimer et d'obtenir la reconnaissance.", "affinites": "Equus (Nov.), Lynx (Août)", "oppose": "—"}, {"name": "11 Equus", "mois": "Novembre", "genre": "Féminin", "element": "Feu", "astre": "Mercure", "mineral": "Rubis", "defluence": "La Violence", "fondamental": "Agir", "couleur": "Rouge", "texte": "Equus est un des signes les plus dynamiques du Nodiaque. Extravagant, aventurier, courageux et enthousiaste. Sa Défluence exprime passion et désir. Attiré par les sports dynamiques, mais aussi communicant, auteur. Fougueux et séducteur en amour.", "affinites": "Serpent (Mars), Stella (Juil.)", "oppose": "Pentacle (Mai)"}, {"name": "12 Aigle", "mois": "Décembre", "genre": "Masculin", "element": "Air", "astre": "Mars", "mineral": "Saphir", "defluence": "Le Pouvoir", "fondamental": "Réaliser", "couleur": "Bleu ciel", "texte": "L'Aigle représente la force, la gloire, la noblesse et la droiture. C'est le signe des rois, des grands de ce monde. Sa Défluence l'amène à conquérir et à dominer. Son regard aiguisé discerne ce que les autres ne voient pas. Il ira vers les métiers de pouvoir.", "affinites": "Buffle (Avril), Neptunus (Juin)", "oppose": "—"}];
+function openSignModal(idx){
+  const s=SIGN_DATA[idx];
+  document.getElementById('modalTitle').textContent=s.name;
+  document.getElementById('modalMonth').textContent=s.mois+' — '+s.genre+' — Fondamental du '+s.fondamental;
+  document.getElementById('modalDefluence').textContent='Défluence : '+s.defluence;
+  document.getElementById('modalGrid').innerHTML=
+    '<span>Élément</span><strong>'+s.element+'</strong>'+
+    '<span>Astre</span><strong>'+s.astre+'</strong>'+
+    '<span>Minéral</span><strong>'+s.mineral+'</strong>'+
+    '<span>Couleur</span><strong>'+s.couleur+'</strong>';
+  document.getElementById('modalTexte').textContent=s.texte;
+  document.getElementById('modalAffinites').innerHTML=
+    '✦ Affinités : <strong>'+s.affinites+'</strong>'+
+    (s.oppose!=='—'?' &nbsp;·&nbsp; Opposé : <strong>'+s.oppose+'</strong>':'');
+  document.getElementById('signModal').classList.add('open');
+}
+
 function compute(){
   const d =parseInt(document.getElementById('iDay').value)  ||6;
   const m =parseInt(document.getElementById('iMonth').value)||1;
