@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Les 12 Signes du Nodiaque — Noastrologie / Nowastrology">
+<title>Les Signes du Nodiaque — Noastrologie</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a1a5a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cosmos-deep:   #04040f;
+  --cosmos-mid:    #0d0d3a;
+  --cosmos-light:  #1a1a5a;
+  --gold:          #d4a840;
+  --gold-light:    #f0c860;
+  --red-dark:      #8b1a1a;
+  --text-main:     #ddeeff;
+  --text-muted:    #8899bb;
+  --text-accent:   #aaccff;
+  --border:        rgba(100,140,255,0.25);
+  --pill-bg:       rgba(15,15,100,0.88);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--cosmos-deep);
+  color: var(--text-main);
+  min-height: 100vh;
+}
+.cosmos-bg {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 30% 25%, rgba(58,32,160,0.3) 0%, transparent 55%),
+              radial-gradient(ellipse at 70% 75%, rgba(32,8,128,0.25) 0%, transparent 55%),
+              radial-gradient(ellipse at 50% 50%, #1a1a5a 0%, #0d0d3a 40%, #04040f 100%);
+}
+.stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.stars::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(1.4px 1.4px at 12% 18%, white 0%, transparent 100%),
+    radial-gradient(1.1px 1.1px at 28% 42%, rgba(200,210,255,0.9) 0%, transparent 100%),
+    radial-gradient(1.7px 1.7px at 45% 8%,  white 0%, transparent 100%),
+    radial-gradient(0.9px 0.9px at 62% 31%, rgba(255,220,220,0.8) 0%, transparent 100%),
+    radial-gradient(1.3px 1.3px at 78% 55%, white 0%, transparent 100%),
+    radial-gradient(0.8px 0.8px at 88% 12%, rgba(200,210,255,0.9) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 5%  72%, white 0%, transparent 100%),
+    radial-gradient(1.0px 1.0px at 35% 88%, rgba(255,210,210,0.8) 0%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 55% 65%, white 0%, transparent 100%),
+    radial-gradient(0.7px 0.7px at 92% 82%, rgba(200,220,255,0.9) 0%, transparent 100%),
+    radial-gradient(1.1px 1.1px at 18% 55%, white 0%, transparent 100%),
+    radial-gradient(0.9px 0.9px at 72% 22%, rgba(255,230,200,0.8) 0%, transparent 100%);
+}
+.content { position: relative; z-index: 1; }
+
+/* ── Navigation ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(4,4,20,0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  height: 58px;
+}
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-size: .95rem; font-weight: 700;
+  color: var(--gold); letter-spacing: .12em;
+  text-decoration: none; white-space: nowrap;
+}
+.nav-links { display: flex; gap: 4px; list-style: none; }
+.nav-links a {
+  font-family: 'Cinzel', serif;
+  font-size: .72rem; font-weight: 600;
+  color: var(--text-accent); text-decoration: none;
+  padding: 6px 10px; border-radius: 5px;
+  letter-spacing: .08em; transition: background .2s, color .2s;
+  white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.active { background: var(--pill-bg); color: white; }
+.nav-links a.cta { background: var(--red-dark); color: white; margin-left: 8px; }
+.nav-links a.cta:hover { background: #a02020; }
+
+/* ── Page header ── */
+.page-header {
+  text-align: center;
+  padding: 70px 24px 50px;
+}
+.page-header .eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: .72rem; font-weight: 600;
+  letter-spacing: .4em; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 16px;
+}
+.page-header h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 600; color: white;
+  letter-spacing: .06em; margin-bottom: 14px;
+}
+.page-header p {
+  font-size: .95rem; color: var(--text-muted);
+  max-width: 560px; margin: 0 auto;
+  line-height: 1.7; font-weight: 300; font-style: italic;
+}
+
+/* ── Anchor nav ── */
+.anchor-nav {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  justify-content: center;
+  padding: 0 24px 50px;
+  max-width: 900px; margin: 0 auto;
+}
+.anchor-nav a {
+  font-family: 'Cinzel', serif;
+  font-size: .72rem; font-weight: 600;
+  color: white; text-decoration: none;
+  padding: 7px 14px; border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--pill-bg);
+  letter-spacing: .06em;
+  transition: all .2s;
+}
+.anchor-nav a:hover { border-color: rgba(140,180,255,0.5); background: rgba(25,25,120,0.95); }
+
+/* ── Sign cards ── */
+.signs-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+  display: flex; flex-direction: column; gap: 48px;
+}
+
+.sign-card {
+  background: rgba(8,8,40,0.75);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  scroll-margin-top: 80px;
+}
+
+.sign-header {
+  display: flex; align-items: stretch;
+  border-bottom: 1px solid var(--border);
+}
+.sign-number {
+  display: flex; align-items: center; justify-content: center;
+  width: 80px; min-width: 80px;
+  font-family: 'Cinzel', serif;
+  font-size: 2.2rem; font-weight: 700;
+  color: var(--gold);
+  background: rgba(15,15,60,0.6);
+  border-right: 1px solid var(--border);
+}
+.sign-title-block {
+  padding: 20px 24px;
+  flex: 1;
+}
+.sign-mois {
+  font-size: .72rem; font-weight: 600;
+  letter-spacing: .25em; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 4px;
+}
+.sign-name {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 700; color: white;
+  letter-spacing: .05em; margin-bottom: 6px;
+}
+.sign-tags {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.tag {
+  font-size: .68rem; font-family: 'Cinzel', serif;
+  padding: 3px 10px; border-radius: 12px;
+  border: 1px solid var(--border);
+  letter-spacing: .06em;
+}
+.tag-genre    { color: #ffaacc; border-color: rgba(255,150,180,0.3); background: rgba(80,0,40,0.3); }
+.tag-fondamental { color: #aaddff; border-color: rgba(100,180,255,0.3); background: rgba(0,40,80,0.3); }
+.tag-defluence{ color: var(--gold-light); border-color: rgba(212,168,64,0.3); background: rgba(80,50,0,0.3); }
+
+.sign-body { padding: 24px; }
+
+.sign-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px 20px;
+  margin-bottom: 22px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(100,140,255,0.12);
+}
+.meta-item { display: flex; flex-direction: column; gap: 2px; }
+.meta-label {
+  font-size: .66rem; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--text-muted);
+  font-weight: 600;
+}
+.meta-value {
+  font-family: 'Cinzel', serif;
+  font-size: .88rem; font-weight: 600;
+  color: var(--text-accent);
+}
+
+.sign-texte {
+  font-size: .9rem; line-height: 1.85;
+  color: var(--text-main); font-weight: 300;
+  margin-bottom: 20px;
+}
+.sign-texte p { margin-bottom: 12px; }
+.sign-texte p:last-child { margin-bottom: 0; }
+
+.sign-affinites {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(100,140,255,0.12);
+}
+.affinite-block { flex: 1; min-width: 180px; }
+.affinite-label {
+  font-size: .68rem; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--text-muted);
+  font-weight: 600; margin-bottom: 4px;
+}
+.affinite-value {
+  font-size: .85rem; color: var(--text-accent);
+  font-weight: 400;
+}
+
+/* ── WIP notice ── */
+.wip {
+  text-align: center;
+  padding: 40px 24px 80px;
+  max-width: 600px; margin: 0 auto;
+}
+.wip p {
+  font-family: 'Cinzel', serif;
+  font-size: .82rem; color: var(--text-muted);
+  letter-spacing: .08em; line-height: 1.8;
+}
+.wip span { color: var(--gold); }
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid var(--border);
+  text-align: center; padding: 24px;
+  font-size: .72rem; color: var(--text-muted);
+  font-family: 'Cinzel', serif; letter-spacing: .06em;
+}
+footer a { color: var(--text-accent); text-decoration: none; }
+
+/* ── Reveal ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 600px) {
+  .sign-number { width: 52px; min-width: 52px; font-size: 1.6rem; }
+  .sign-name { font-size: 1.3rem; }
+  nav { padding: 0 10px; }
+  .nav-links a { font-size: .6rem; padding: 5px 6px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cosmos-bg"></div>
+<div class="stars"></div>
+
+<div class="content">
+
+<!-- ── Navigation ── -->
+<nav>
+  <a href="index.html" class="nav-logo">✦ Noastrologie</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="signes.html" class="active">Les Signes</a></li>
+    <li><a href="astres.html">Les Astres</a></li>
+    <li><a href="elements.html">Les Éléments</a></li>
+    <li><a href="scheme.html">Le Schème</a></li>
+    <li><a href="accueil.html" class="cta">✦ Nodiaque</a></li>
+  </ul>
+</nav>
+
+<!-- ── Header ── -->
+<div class="page-header">
+  <p class="eyebrow">Noastrologie · Nowastrology</p>
+  <h1>Les Signes du Nodiaque</h1>
+  <p>Douze signes originaux — un pour chaque mois de l'année — chacun avec son élément, son astre, sa défluence et son fondamental propres.</p>
+</div>
+
+<!-- ── Anchor nav ── -->
+<div class="anchor-nav">
+  <a href="#licorne">1 Licorne</a>
+  <a href="#quadran">2 Quadran</a>
+  <a href="#serpent">3 Serpent</a>
+  <a href="#buffle">4 Buffle</a>
+  <a href="#pentacle">5 Pentacle</a>
+  <a href="#neptunus">6 Neptunus</a>
+  <a href="#stella">7 Stella</a>
+  <a href="#lynx" style="opacity:.5;">8 Lynx</a>
+  <a href="#caprus" style="opacity:.5;">9 Caprus</a>
+  <a href="#coq" style="opacity:.5;">10 Coq</a>
+  <a href="#equus" style="opacity:.5;">11 Equus</a>
+  <a href="#aigle" style="opacity:.5;">12 Aigle</a>
+</div>
+
+<!-- ── Signs ── -->
+<div class="signs-container">
+
+  <!-- 1 Licorne -->
+  <div class="sign-card reveal" id="licorne">
+    <div class="sign-header">
+      <div class="sign-number">1</div>
+      <div class="sign-title-block">
+        <div class="sign-mois">Janvier</div>
+        <div class="sign-name">Licorne</div>
+        <div class="sign-tags">
+          <span class="tag tag-genre">Féminin</span>
+          <span class="tag tag-fondamental">Fondamental du Penser</span>
+          <span class="tag tag-defluence">Défluence : Le Défi</span>
+        </div>
+      </div>
+    </div>
+    <div class="sign-body">
+      <div class="sign-meta">
+        <div class="meta-item"><span class="meta-label">Élément</span><span class="meta-value">Cristal</span></div>
+        <div class="meta-item"><span class="meta-label">Astre</span><span class="meta-value">Saturne</span></div>
+        <div class="meta-item"><span class="meta-label">Minéral</span><span class="meta-value">Quartz</span></div>
+        <div class="meta-item"><span class="meta-label">Couleur</span><span class="meta-value">Transparent / Nacré</span></div>
+        <div class="meta-item"><span class="meta-label">Chiffre</span><span class="meta-value">1</span></div>
+      </div>
+      <div class="sign-texte">
+        <p>Signe féminin, du premier mois de l'année, premier signe du Nodiaque, Licorne appartient au Fondamental du Penser. Associée au chiffre 1, symbole de ce qui est unique, en première place, Licorne cherchera à se distinguer, se présenter comme supérieure aux autres pour affirmer sa personnalité. De là son indépendance de raisonnement et son originalité.</p>
+        <p>Son élément, le Cristal, signe brillant et transparent, révèle aussi sa structure interne en multiples facettes qui se reflètent l'une l'autre. Sa Défluence est le Défi, expression de sa volonté de se distinguer. Passionnée par ce qui semble impossible à conquérir, elle admire les performances et en tentera de nombreuses tout au long de sa vie. C'est un moteur intime de sa vie quotidienne qui lui fera tenter sans cesse de nouvelles choses et sera son leitmotiv.</p>
+        <p>Cependant, appartenant au Fondamental du Penser, la Licorne préférera les défis impliquant la réflexion plutôt que l'action. C'est un être de premier plan, qui a besoin d'être à la tête. Mais son Fondamental l'amènera parfois à se contenter de la réflexion, ou de l'imagination qui est chez elle très puissante. Elle le revendiquera en tentant de s'imposer par ses initiatives et sa tendance naturelle à commander.</p>
+        <p>Ses caractères principaux sont la volonté, l'ardeur, l'ambition, le courage. Elle est commandée par son Astre Saturne, synonyme d'orgueil, de rayonnement, de discipline et de concentration. Ardeur, ambition, réussite et rayonnement feront de Licorne un penseur, un chercheur, un philosophe de premier plan. Licorne s'intéressera aux grandes institutions, aux grandes idées, aux premières places — Prix Nobel, écrivain, chercheur. En affaires elle agira volontiers de concert avec les signes de son Fondamental (Pentacle, Caprus) et prendra naturellement la tête de l'association.</p>
+        <p>Affectivement la Licorne aime naturellement dominer, et sera bien souvent attirée par son signe opposé, Stella (Juillet), du Fondamental de l'Agir, avec qui elle recherchera une union passionnée.</p>
+      </div>
+      <div class="sign-affinites">
+        <div class="affinite-block">
+          <div class="affinite-label">Affinités</div>
+          <div class="affinite-value">Pentacle (Mai) · Caprus (Septembre)</div>
+        </div>
+        <div class="affinite-block">
+          <div class="affinite-label">Attirance · Opposé</div>
+          <div class="affinite-value">Stella (Juillet)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 Quadran -->
+  <div class="sign-card reveal" id="quadran">
+    <div class="sign-header">
+      <div class="sign-number">2</div>
+      <div class="sign-title-block">
+        <div class="sign-mois">Février</div>
+        <div class="sign-name">Quadran</div>
+        <div class="sign-tags">
+          <span class="tag tag-genre">Masculin</span>
+          <span class="tag tag-fondamental">Fondamental de l'Être</span>
+          <span class="tag tag-defluence">Défluence : L'Immobilisme</span>
+        </div>
+      </div>
+    </div>
+    <div class="sign-body">
+      <div class="sign-meta">
+        <div class="meta-item"><span class="meta-label">Élément</span><span class="meta-value">Pierre</span></div>
+        <div class="meta-item"><span class="meta-label">Astre</span><span class="meta-value">Pluton</span></div>
+        <div class="meta-item"><span class="meta-label">Minéral</span><span class="meta-value">Améthyste</span></div>
+        <div class="meta-item"><span class="meta-label">Couleur</span><span class="meta-value">Violet</span></div>
+        <div class="meta-item"><span class="meta-label">Chiffre</span><span class="meta-value">2</span></div>
+      </div>
+      <div class="sign-texte">
+        <p>En février, Quadran est masculin et du Fondamental de l'Être, qui regroupe également Neptunus et Coq. Appartenir à ce Fondamental c'est d'abord se préoccuper de soi, de sa propre existence, de sa propre personne. Les Signes de cette catégorie sont proches de la vie, attentifs plutôt à ce qu'elle leur offre qu'à ce qu'ils peuvent obtenir par leur action.</p>
+        <p>La Défluence de Quadran est l'Immobilisme. Son penchant naturel est de ne rien changer, de conserver les acquis quels qu'ils soient. Quadran aime le foyer, la famille, le passé, l'histoire, les institutions. Ses valeurs sont traditionnelles : l'ordre, la tradition, la bienfaisance, la hiérarchie, la religion. Son Élément est la Pierre, sur quoi l'on bâtit, signe de durabilité et de traditionnalisme.</p>
+        <p>Son chiffre associé, le 2, le porte à fuir la solitude. Quadran aime à ne pas se retrouver seul, à former un couple sentimental ou amical avec ceux qu'il apprécie. Bien qu'attiré par le couple, il aura du mal à se décider pour un partenaire, préférant souvent le cocon familial.</p>
+        <p>Son Astre associé est Pluton, qui l'attirera vers le mysticisme, l'austérité, et quelquefois le poussera à la paresse, au découragement et à l'attentisme. Son signe opposé est le Lynx (Août), avec qui il a peu d'atomes crochus et qu'il ne comprend pas du tout.</p>
+        <p>Professionnellement, Quadran préfèrera les métiers liés à l'étude du passé, l'histoire, l'archéologie, la recherche des traditions, les grands mythes, la religion. Affectivement, il recherchera souvent son propre signe. Neptunus (Juin) l'attirera pour son romanesque, et le Coq (Octobre) le séduira par son rayonnement et sa chance surprenante.</p>
+      </div>
+      <div class="sign-affinites">
+        <div class="affinite-block">
+          <div class="affinite-label">Affinités</div>
+          <div class="affinite-value">Neptunus (Juin) · Coq (Octobre)</div>
+        </div>
+        <div class="affinite-block">
+          <div class="affinite-label">Opposé</div>
+          <div class="affinite-value">Lynx (Août)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 Serpent -->
+  <div class="sign-card reveal" id="serpent">
+    <div class="sign-header">
+      <div class="sign-number">3</div>
+      <div class="sign-title-block">
+        <div class="sign-mois">Mars</div>
+        <div class="sign-name">Serpent</div>
+        <div class="sign-tags">
+          <span class="tag tag-genre">Féminin</span>
+          <span class="tag tag-fondamental">Fondamental de l'Agir</span>
+          <span class="tag tag-defluence">Défluence : La Séduction</span>
+        </div>
+      </div>
+    </div>
+    <div class="sign-body">
+      <div class="sign-meta">
+        <div class="meta-item"><span class="meta-label">Élément</span><span class="meta-value">Parole</span></div>
+        <div class="meta-item"><span class="meta-label">Astre</span><span class="meta-value">Vénus</span></div>
+        <div class="meta-item"><span class="meta-label">Minéral</span><span class="meta-value">Jaspe</span></div>
+        <div class="meta-item"><span class="meta-label">Couleur</span><span class="meta-value">Vert</span></div>
+        <div class="meta-item"><span class="meta-label">Chiffre</span><span class="meta-value">3</span></div>
+      </div>
+      <div class="sign-texte">
+        <p>Mars est le mois du Serpent, dont la Défluence est la séduction. C'est un signe féminin, son Élément associé est la Parole — une grande facilité à s'exprimer, à discourir sans cesse à propos de tout et de rien. Dans la Genèse, le serpent séduit Ève par son discours…</p>
+        <p>Le Serpent est du Fondamental de l'Agir, qui regroupe également Stella et Equus. Appartenir à ce Fondamental c'est d'abord se mettre en action, être en mouvement. Les signes de cette catégorie sont actifs, ils "font" — que ce soit pour séduire comme le Serpent, pour commercer comme Stella, ou pour se mesurer aux autres comme Equus. Le Serpent s'intéresse à l'avenir, aux relations sociales, aux amitiés, aux inventions. Il est doué de ruse, de fascination, très indépendant.</p>
+        <p>Son chiffre associé est le 3, chiffre qui porte en lui la séduction (car pour séduire il faut un témoin). Le trois est aussi significatif de la stabilité, que le Serpent recherchera sa vie durant, tiraillé entre l'envie de séduire toujours et le déséquilibre dans lequel il se trouvera en formant un couple. Son Astre associé, Vénus, est l'Astre de la sensibilité, des émotions et de la grâce.</p>
+        <p>Le Serpent choisira un métier de relations sociales, mais il fera aussi un bon inventeur ou un négociateur de premier plan. Il aura du mal à se stabiliser affectivement, sauf s'il réussit à mener une vie à trois qui est son idéal sentimental, ou si une passion l'occupe pleinement. Il sera souvent attiré par Stella (Juillet) qu'il faut séduire sans cesse, ou par le Lynx (Août) dont les mystères le fascineront.</p>
+      </div>
+      <div class="sign-affinites">
+        <div class="affinite-block">
+          <div class="affinite-label">Affinités</div>
+          <div class="affinite-value">Stella (Juillet) · Lynx (Août)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 Buffle -->
+  <div class="sign-card reveal" id="buffle">
+    <div class="sign-header">
+      <div class="sign-number">4</div>
+      <div class="sign-title-block">
+        <div class="sign-mois">Avril</div>
+        <div class="sign-name">Buffle</div>
+        <div class="sign-tags">
+          <span class="tag tag-genre">Masculin</span>
+          <span class="tag tag-fondamental">Fondamental du Réaliser</span>
+          <span class="tag tag-defluence">Défluence : La Persévérance</span>
+        </div>
+      </div>
+    </div>
+    <div class="sign-body">
+      <div class="sign-meta">
+        <div class="meta-item"><span class="meta-label">Élément</span><span class="meta-value">Terre</span></div>
+        <div class="meta-item"><span class="meta-label">Astre</span><span class="meta-value">Jupiter</span></div>
+        <div class="meta-item"><span class="meta-label">Minéral</span><span class="meta-value">Ambre</span></div>
+        <div class="meta-item"><span class="meta-label">Couleur</span><span class="meta-value">Jaune</span></div>
+        <div class="meta-item"><span class="meta-label">Chiffre</span><span class="meta-value">4</span></div>
+      </div>
+      <div class="sign-texte">
+        <p>Le Buffle est un tâcheron. Sa force, sa puissance, sa patience alliées à sa Défluence, la Persévérance, le mèneront loin. C'est un signe masculin. Il appartient au Fondamental du Réaliser, comme le Lynx et l'Aigle. Appartenir à ce Fondamental c'est être constructif, dur à la tâche, patient, garder en ligne de mire un but que l'on souhaite atteindre.</p>
+        <p>Le Buffle a comme Astre Jupiter, l'autorité, la maturité, la réussite mais aussi la sensualité et la possessivité. Il aime construire, réaliser des tâches difficiles et les mener à bien. Il progresse sûrement en assumant pleinement ses responsabilités, ce qui a tendance à l'angoisser car il veut être digne de la confiance qu'on met en lui.</p>
+        <p>Son chiffre associé, le 4, est le premier chiffre pair. Le Buffle peut avoir des métiers très différents, pourvu qu'ils lui permettent de s'atteler à une tâche de longue haleine. Il est plutôt réfractaire aux changements et peut parfois se montrer tout à fait inflexible. Négocier avec lui signifie souvent se heurter à un véritable mur.</p>
+      </div>
+      <div class="sign-affinites">
+        <div class="affinite-block">
+          <div class="affinite-label">Affinités</div>
+          <div class="affinite-value">Quadran (Fév.) · Pentacle (Mai)</div>
+        </div>
+        <div class="affinite-block">
+          <div class="affinite-label">Fuit</div>
+          <div class="affinite-value">Coq (Octobre)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 Pentacle -->
+  <div class="sign-card reveal" id="pentacle">
+    <div class="sign-header">
+      <div class="sign-number">5</div>
+      <div class="sign-title-block">
+        <div class="sign-mois">Mai</div>
+        <div class="sign-name">Pentacle</div>
+        <div class="sign-tags">
+          <span class="tag tag-genre">Féminin</span>
+          <span class="tag tag-fondamental">Fondamental du Penser</span>
+          <span class="tag tag-defluence">Défluence : La Stabilité</span>
+        </div>
+      </div>
+    </div>
+    <div class="sign-body">
+      <div class="sign-meta">
+        <div class="meta-item"><span class="meta-label">Élément</span><span class="meta-value">Métal</span></div>
+        <div class="meta-item"><span class="meta-label">Astre</span><span class="meta-value">Uranus</span></div>
+        <div class="meta-item"><span class="meta-label">Minéral</span><span class="meta-value">Mercurium</span></div>
+        <div class="meta-item"><span class="meta-label">Couleur</span><span class="meta-value">Argent</span></div>
+        <div class="meta-item"><span class="meta-label">Chiffre</span><span class="meta-value">5</span></div>
+      </div>
+      <div class="sign-texte">
+        <p>Signe par essence de la pondération, le Pentacle, né en mai, appartient au Fondamental du Penser. C'est un signe féminin. Il aime à réfléchir, il est plutôt calme, presque Zen pourrait-on dire. Sa Défluence, la Stabilité, et son Astre dominant, Uranus, le confortent dans l'idée que le temps lui appartient.</p>
+        <p>Le Pentacle aime l'analyse, la réflexion, c'est un esprit brillant mais sa pudeur innée l'empêche de se mettre en avant, au point qu'on le taxe souvent de timide. Il en vient parfois à se replier sur lui-même. Son chiffre associé est le 5, qui lui a donné le pentagone comme symbole. Son Élément, le Métal, est symbolique des outils que s'est fabriqué l'homme.</p>
+        <p>Le Pentacle sera attiré par les métiers de la recherche, de la réflexion, de la philosophie. Aimant la relation à autrui et soucieux de faire partager son savoir, il fera un bon pédagogue et sera un excellent professeur. Il s'attachera plutôt difficilement, en tous cas après mûre réflexion et souvent tardivement.</p>
+      </div>
+      <div class="sign-affinites">
+        <div class="affinite-block">
+          <div class="affinite-label">Affinités</div>
+          <div class="affinite-value">Lynx (Août) · Neptunus (Juin)</div>
+        </div>
+        <div class="affinite-block">
+          <div class="affinite-label">Opposé</div>
+          <div class="affinite-value">Equus (Novembre)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 Neptunus -->
+  <div class="sign-card reveal" id="neptunus">
+    <div class="sign-header">
+      <div class="sign-number">6</div>
+      <div class="sign-title-block">
+        <div class="sign-mois">Juin</div>
+        <div class="sign-name">Neptunus</div>
+        <div class="sign-tags">
+          <span class="tag tag-genre">Masculin</span>
+          <span class="tag tag-fondamental">Fondamental de l'Être</span>
+          <span class="tag tag-defluence">Défluence : La Fécondité</span>
+        </div>
+      </div>
+    </div>
+    <div class="sign-body">
+      <div class="sign-meta">
+        <div class="meta-item"><span class="meta-label">Élément</span><span class="meta-value">Eau</span></div>
+        <div class="meta-item"><span class="meta-label">Astre</span><span class="meta-value">Neptune</span></div>
+        <div class="meta-item"><span class="meta-label">Minéral</span><span class="meta-value">Jade</span></div>
+        <div class="meta-item"><span class="meta-label">Couleur</span><span class="meta-value">Vert foncé bleuté</span></div>
+        <div class="meta-item"><span class="meta-label">Chiffre</span><span class="meta-value">6</span></div>
+      </div>
+      <div class="sign-texte">
+        <p>Signe masculin, Neptunus est un signe très ouvert, inventif, sensible, impatient. Sa Défluence est la Fécondité, qui le poussera à avoir une belle descendance ou à faire naître de ses mains ou de son intellect beaucoup de choses. Appartenant au Fondamental de l'Être, il est sensible à ce qui est vie et poursuit souvent un idéal.</p>
+        <p>Son Astre, Neptune, lui donne de la volonté, de l'intuition, de l'inspiration et du rêve. C'est un poète, un créateur doué d'une forte sensibilité. Il se laisse volontiers aller vers les lointains, les voyages autant de l'esprit que du corps. Il est naturellement attiré par le mysticisme, l'ésotérisme, la voyance. C'est un humaniste.</p>
+        <p>Son chiffre associé est le 6, la double trinité. Son Élément est l'Eau. Il sera volontiers marin au long cours ou compétiteur solitaire pour réunir sa passion de la mer et sa spiritualité. Sentimentalement, il sera attiré par Quadran, autre signe porté vers la tradition et la religion, ou Pentacle, dont le mental le séduira.</p>
+      </div>
+      <div class="sign-affinites">
+        <div class="affinite-block">
+          <div class="affinite-label">Affinités</div>
+          <div class="affinite-value">Quadran (Fév.) · Pentacle (Mai)</div>
+        </div>
+        <div class="affinite-block">
+          <div class="affinite-label">Fascination</div>
+          <div class="affinite-value">Serpent (Mars)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 Stella -->
+  <div class="sign-card reveal" id="stella">
+    <div class="sign-header">
+      <div class="sign-number">7</div>
+      <div class="sign-title-block">
+        <div class="sign-mois">Juillet</div>
+        <div class="sign-name">Stella</div>
+        <div class="sign-tags">
+          <span class="tag tag-genre">Féminin</span>
+          <span class="tag tag-fondamental">Fondamental de l'Agir</span>
+          <span class="tag tag-defluence">Défluence : La Mobilité</span>
+        </div>
+      </div>
+    </div>
+    <div class="sign-body">
+      <div class="sign-meta">
+        <div class="meta-item"><span class="meta-label">Élément</span><span class="meta-value">Sable</span></div>
+        <div class="meta-item"><span class="meta-label">Astre</span><span class="meta-value">Astérydes</span></div>
+        <div class="meta-item"><span class="meta-label">Minéral</span><span class="meta-value">Agathe</span></div>
+        <div class="meta-item"><span class="meta-label">Couleur</span><span class="meta-value">Beige doré</span></div>
+        <div class="meta-item"><span class="meta-label">Chiffre</span><span class="meta-value">7</span></div>
+      </div>
+      <div class="sign-texte">
+        <p>Stella, signe féminin du Fondamental de l'Agir, est caractérisé par la flexibilité, l'adaptabilité et la mobilité. Signe de changement, un peu excentrique et volubile, parfois jusqu'à l'irrationnel. Son Astre, Astérydes, est multiple — il représente la ceinture des astéroïdes qui par millions orbitent au sein du système solaire entre Mars et Jupiter. Ils ne sont pas responsables des étoiles filantes, mais celles-ci sont malgré tout à l'image de Stella : vivaces, brèves, brillantes, et attirent le regard.</p>
+        <p>Se mouvant sans cesse d'une activité à l'autre, Stella semble parfois insaisissable. Sa Défluence est la Mobilité. On la recherche en un lieu, dans une pensée, une idée, mais elle est en fait "ailleurs". Elle aime passer d'un univers à l'autre, de la réflexion au travail concret. Entreprendre est son univers, et elle a un goût sûr qui lui permet de s'exprimer avec séduction et raffinement. C'est un être de communication, qui se nourrit d'une foule de contacts.</p>
+        <p>Le chiffre 7 qui lui est associé est souvent considéré comme magique. Stella se lance facilement dans des activités diverses, s'investit, s'agite, et se retrouve face à une abondance de projets qu'elle a du mal à démêler. Son Élément, le Sable, est comme elle insaisissable — il coule entre les doigts, s'envole avec le vent. Côté professionnel, Stella sera attirée par le commerce, le futur, la science-fiction. Stella est souvent le signe des génies et des excentriques.</p>
+        <p>Sentimentalement, Stella aura du mal à se fixer. Licorne (Janvier) est le signe qui l'attirera le moins (mais la réciproque n'est pas vraie…). Elle aimera le Coq (Octobre) pour son éclat et son apparence, et le Lynx (Août) avec qui elle a certaines affinités.</p>
+      </div>
+      <div class="sign-affinites">
+        <div class="affinite-block">
+          <div class="affinite-label">Affinités</div>
+          <div class="affinite-value">Coq (Oct.) · Lynx (Août)</div>
+        </div>
+        <div class="affinite-block">
+          <div class="affinite-label">Opposé</div>
+          <div class="affinite-value">Licorne (Janvier)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WIP notice -->
+  <div class="wip reveal">
+    <p>✦ &nbsp; <span>Les signes 8 à 12</span> (Lynx, Caprus, Coq, Equus, Aigle) &nbsp; ✦<br>
+    seront disponibles prochainement.<br>
+    <span>Noastrologie — Nowastrology · © 2014–2026 Jean-Michel Reboul</span></p>
+  </div>
+
+</div><!-- /signs-container -->
+
+<!-- ── Footer ── -->
+<footer>
+  <p>
+    <a href="index.html">Noastrologie</a> ·
+    <a href="signes.html">Les Signes</a> ·
+    <a href="astres.html">Les Astres</a> ·
+    <a href="elements.html">Les Éléments</a> ·
+    <a href="scheme.html">Le Schème</a> ·
+    <a href="accueil.html">Le Nodiaque</a>
+  </p>
+  <p style="margin-top:8px; font-size:.65rem; font-family:'Lato',sans-serif; font-weight:300; letter-spacing:.04em;">
+    © 2014–2026 Jean-Michel Reboul (JMR) — Noastrologie / Nowastrology · Tous droits réservés
+  </p>
+</footer>
+
+</div><!-- /content -->
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
