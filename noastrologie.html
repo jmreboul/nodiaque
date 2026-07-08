@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="La Noastrologie — Guide symbolique pour lire les moments de la vie. Essai de Jean-Michel Reboul.">
+<title>Noastrologie — Guide symbolique</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a1a5a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:#d4a840; --gold-light:#f0c860; --red-dark:#8b1a1a;
+  --text-main:#ddeeff; --text-muted:#8899bb; --text-accent:#aaccff;
+  --border:rgba(100,140,255,0.25); --pill-bg:rgba(15,15,100,0.88);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Lato',sans-serif;background:#04040f;color:var(--text-main);
+  min-height:100vh;overflow-x:hidden;}
+
+.cosmos-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse at 30% 25%,rgba(58,32,160,.35) 0%,transparent 55%),
+             radial-gradient(ellipse at 70% 75%,rgba(32,8,128,.30) 0%,transparent 55%),
+             radial-gradient(ellipse at 50% 50%,#1a1a5a 0%,#0d0d3a 40%,#04040f 100%);}
+.stars{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.stars::before{content:'';position:absolute;inset:0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%,white 0%,transparent 100%),
+    radial-gradient(1.2px 1.2px at 28% 42%,rgba(200,210,255,.9) 0%,transparent 100%),
+    radial-gradient(1.8px 1.8px at 45%  8%,white 0%,transparent 100%),
+    radial-gradient(1.0px 1.0px at 62% 31%,rgba(255,220,220,.8) 0%,transparent 100%),
+    radial-gradient(1.4px 1.4px at 78% 55%,white 0%,transparent 100%),
+    radial-gradient(0.9px 0.9px at 88% 12%,rgba(200,210,255,.9) 0%,transparent 100%),
+    radial-gradient(1.6px 1.6px at  5% 72%,white 0%,transparent 100%),
+    radial-gradient(1.1px 1.1px at 35% 88%,rgba(255,210,210,.8) 0%,transparent 100%),
+    radial-gradient(1.3px 1.3px at 55% 65%,white 0%,transparent 100%),
+    radial-gradient(0.8px 0.8px at 92% 82%,rgba(200,220,255,.9) 0%,transparent 100%);}
+.content{position:relative;z-index:1;}
+
+/* ── Nav ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(4,4,20,.90);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);
+  padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:'Cinzel',serif;font-size:.95rem;font-weight:700;color:var(--gold);
+  letter-spacing:.12em;text-decoration:none;white-space:nowrap;}
+.nav-links{display:flex;gap:4px;list-style:none;flex-wrap:wrap;}
+.nav-links a{font-family:'Cinzel',serif;font-size:.68rem;font-weight:600;color:var(--text-accent);
+  text-decoration:none;padding:5px 9px;border-radius:5px;letter-spacing:.07em;
+  transition:background .2s,color .2s;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{background:var(--pill-bg);color:white;}
+.nav-links a.cta{background:var(--red-dark);color:white;margin-left:6px;font-weight:700;}
+.nav-links a.cta:hover{background:#a02020;}
+.nav-links a.wip{opacity:.45;cursor:default;}
+
+/* ── Page header ── */
+.page-header{text-align:center;padding:70px 24px 50px;}
+.page-header .eyebrow{font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;
+  letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:16px;}
+.page-header h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,5vw,3rem);
+  font-weight:600;color:white;letter-spacing:.06em;margin-bottom:10px;}
+.page-header .tagline{font-family:'Cinzel',serif;font-size:clamp(.9rem,2vw,1.1rem);
+  font-weight:400;color:var(--text-accent);letter-spacing:.12em;
+  font-style:italic;margin-bottom:20px;}
+
+/* ── Anchor nav ── */
+.anchor-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  padding:0 24px 50px;max-width:900px;margin:0 auto;}
+.anchor-nav a{font-family:'Cinzel',serif;font-size:.7rem;font-weight:600;
+  color:white;text-decoration:none;padding:6px 14px;border-radius:20px;
+  border:1px solid var(--border);background:var(--pill-bg);letter-spacing:.06em;
+  transition:all .2s;}
+.anchor-nav a:hover{border-color:rgba(140,180,255,.5);background:rgba(25,25,120,.95);}
+
+/* ── Essay content ── */
+.essay{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+
+/* Chapters */
+.chapter{margin-bottom:60px;scroll-margin-top:80px;}
+.chapter-num{font-family:'Cinzel',serif;font-size:.68rem;font-weight:600;
+  letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;}
+.chapter h2{font-family:'Cinzel',serif;font-size:clamp(1.2rem,3vw,1.7rem);
+  font-weight:700;color:white;letter-spacing:.05em;margin-bottom:6px;}
+.chapter-divider{width:40px;height:2px;
+  background:linear-gradient(90deg,var(--gold),transparent);margin:10px 0 24px;}
+
+/* Paragraphs */
+.chapter p{font-size:.95rem;line-height:1.9;color:var(--text-main);
+  font-weight:300;margin-bottom:16px;}
+.chapter p:last-child{margin-bottom:0;}
+
+/* Sub-sections (Défluence, Fondamental, etc.) */
+.subsection{margin:24px 0;padding:20px 24px;
+  background:rgba(10,10,50,.6);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;}
+.subsection h3{font-family:'Cinzel',serif;font-size:.92rem;font-weight:700;
+  color:var(--gold-light);letter-spacing:.06em;margin-bottom:10px;}
+.subsection p{font-size:.9rem;line-height:1.85;color:var(--text-main);
+  font-weight:300;margin-bottom:10px;}
+.subsection p:last-child{margin-bottom:0;}
+
+/* Schème card (position in Schème) */
+.scheme-card{margin:24px 0;background:rgba(15,15,65,.7);
+  border:1px solid var(--border);border-radius:10px;padding:20px 24px;}
+.scheme-card h3{font-family:'Cinzel',serif;font-size:.88rem;font-weight:700;
+  color:var(--text-accent);letter-spacing:.06em;margin-bottom:14px;}
+.scheme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+.scheme-item{background:rgba(10,10,50,.6);border-radius:8px;padding:12px 14px;}
+.scheme-item .si-label{font-family:'Cinzel',serif;font-size:.66rem;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.scheme-item .si-text{font-size:.84rem;line-height:1.6;color:var(--text-main);font-weight:300;}
+
+/* Meta band (élément, astre, numéral) */
+.meta-band{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0;}
+.meta-pill{background:rgba(15,15,80,.8);border:1px solid var(--border);
+  border-radius:20px;padding:7px 16px;display:flex;flex-direction:column;gap:2px;}
+.meta-pill .mp-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;}
+.meta-pill .mp-value{font-family:'Cinzel',serif;font-size:.88rem;
+  font-weight:600;color:white;}
+
+/* Résonances */
+.resonance{margin:20px 0;padding:16px 20px;background:rgba(10,10,50,.5);
+  border:1px solid rgba(100,140,255,.2);border-radius:8px;}
+.resonance h3{font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;
+  color:var(--text-accent);letter-spacing:.08em;margin-bottom:8px;}
+.resonance p{font-size:.86rem;line-height:1.7;color:var(--text-main);font-weight:300;}
+
+/* Synthèse */
+.synthese{margin:24px 0;padding:18px 22px;
+  background:rgba(139,26,26,.15);border:1px solid rgba(139,26,26,.3);border-radius:8px;}
+.synthese p{font-size:.9rem;line-height:1.8;color:var(--text-main);
+  font-weight:400;font-style:italic;}
+
+/* Fondamentaux table */
+.fondamentaux{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:24px 0;}
+.fondamental-card{background:rgba(10,10,50,.7);border:1px solid var(--border);
+  border-radius:10px;padding:18px 16px;}
+.fondamental-card h4{font-family:'Cinzel',serif;font-size:.88rem;font-weight:700;
+  color:var(--gold-light);letter-spacing:.06em;margin-bottom:8px;}
+.fondamental-card .signes{font-size:.8rem;color:var(--text-accent);
+  margin-bottom:8px;font-style:italic;}
+.fondamental-card p{font-size:.82rem;line-height:1.65;color:var(--text-main);font-weight:300;}
+
+/* Intro quote */
+.intro-quote{text-align:center;padding:30px 24px 10px;max-width:680px;margin:0 auto 40px;}
+.intro-quote p{font-family:'Cinzel',serif;font-size:clamp(.95rem,2vw,1.15rem);
+  font-weight:400;color:var(--text-accent);line-height:1.8;font-style:italic;}
+
+/* Conclusion */
+.conclusion{text-align:center;max-width:680px;margin:40px auto;
+  padding:32px 28px;background:rgba(15,15,60,.7);border:1px solid rgba(212,168,64,.3);
+  border-radius:14px;}
+.conclusion h2{font-family:'Cinzel',serif;font-size:clamp(1.1rem,2.5vw,1.5rem);
+  font-weight:700;color:var(--gold-light);letter-spacing:.08em;margin-bottom:16px;}
+.conclusion p{font-size:.9rem;line-height:1.85;color:var(--text-main);
+  font-weight:300;margin-bottom:14px;}
+.conclusion .final{font-family:'Cinzel',serif;font-size:1rem;font-weight:600;
+  color:var(--gold);letter-spacing:.1em;margin-top:20px;}
+
+/* Footer */
+footer{border-top:1px solid var(--border);text-align:center;padding:24px;
+  font-size:.7rem;color:var(--text-muted);font-family:'Cinzel',serif;letter-spacing:.07em;}
+footer a{color:var(--text-accent);text-decoration:none;}
+footer a:hover{color:white;}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;}
+.reveal.visible{opacity:1;transform:none;}
+
+@media(max-width:640px){
+  nav{padding:0 10px;}
+  .nav-links a{font-size:.58rem;padding:4px 5px;}
+  .nav-logo{font-size:.8rem;}
+}
+</style>
+</head>
+<body>
+<div class="cosmos-bg"></div>
+<div class="stars"></div>
+<div class="content">
+
+<!-- Navigation -->
+<nav>
+  <a href="index.html" class="nav-logo">✦ Noastrologie</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="signes.html">Les Signes</a></li>
+    <li><a href="#" class="wip">Les Astres &amp; Éléments</a></li>
+    <li><a href="#" class="wip">Votre Schème</a></li>
+    <li><a href="noastrologie.html" class="cta active">Noastrologie</a></li>
+  </ul>
+</nav>
+
+<!-- Header -->
+<div class="page-header">
+  <p class="eyebrow">Essai · Jean-Michel Reboul</p>
+  <h1>La Noastrologie</h1>
+  <p class="tagline">Guide symbolique pour lire les moments de la vie</p>
+</div>
+
+<!-- Anchor nav -->
+<div class="anchor-nav">
+  <a href="#pourquoi">Pourquoi ?</a>
+  <a href="#signes">Les Signes</a>
+  <a href="#scheme">Le Schème</a>
+  <a href="#nodiaque">Le Nodiaque</a>
+  <a href="#fondamentaux">Les Fondamentaux</a>
+  <a href="#licorne">Licorne</a>
+  <a href="#quadran">Quadran</a>
+  <a href="#serpent">Serpent</a>
+  <a href="#buffle">Buffle</a>
+  <a href="#pentacle">Pentacle</a>
+  <a href="#neptunus">Neptunus</a>
+  <a href="#stella">Stella</a>
+  <a href="#lynx">Lynx</a>
+  <a href="#caprus">Caprus</a>
+  <a href="#coq">Coq</a>
+  <a href="#equus">Equus</a>
+  <a href="#aigle">Aigle</a>
+  <a href="#apport">L'apport</a>
+  <a href="#conclusion">Conclusion</a>
+</div>
+
+<div class="essay">
+
+  <!-- 1. Pourquoi -->
+  <div class="chapter reveal" id="pourquoi">
+    <p class="chapter-num">1</p>
+    <h2>La Noastrologie, pourquoi ?</h2>
+    <div class="chapter-divider"></div>
+    <p>Les humains ont cherché depuis toujours à décrypter une multitude de signes, astres, événements cosmiques, cycles, saisons, chiffres et nombres qui ont été les instruments, parmi tant d'autres, de mesures symboliques du monde et de la place que chacun y occupe. Les astrologies traditionnelles ont ainsi été élaborées dans un contexte précis d'époques, de cultures et de lieux, mais elles reflètent autant le ciel que le regard porté par les sociétés qui lui étaient contemporaines. Ni fausses ni vraies, ce sont de simples témoins de nos pensées, de nos interrogations.</p>
+    <p>La Noastrologie est née aujourd'hui d'un constat personnel simple : si les systèmes symboliques parlent surtout de ceux qui les ont créés, alors rien n'interdit d'en inventer de nouveaux, conscients de leur nature, et adaptés à notre époque et nos regards scientifiques, psychologiques, sociétaux… La Noastrologie ne prétend donc pas prédire l'avenir, elle propose seulement un langage de lecture du moment, une grammaire symbolique pour observer une situation, une personne, un événement, sous un angle différent. Un simple jeu de lecture d'un endroit temporel.</p>
+    <p>Elle peut ainsi être abordée de deux manières qui ne s'excluent pas : comme un nouveau regard, une promenade symbolique, ludique, récréative, parfois ironique ; ou comme un outil de réflexion, structuré, cohérent, exigeant. Elle ne demande ni croyance ni adhésion, seulement de jouer le jeu. Dans ce cadre, les Signes de la Noastrologie ne définissent pas des identités figées, mais des tendances, des mouvements, des inclinations, des relations.</p>
+  </div>
+
+  <!-- 2. Les nouveaux Signes -->
+  <div class="chapter reveal" id="signes">
+    <p class="chapter-num">2</p>
+    <h2>Les nouveaux Signes de la Noastrologie</h2>
+    <div class="chapter-divider"></div>
+    <p>Ils sont reliés étroitement aux mois et aux chiffres de notre calendrier. Ce sont, de janvier à décembre : <strong style="color:var(--gold-light);">Licorne, Quadran, Serpent, Buffle, Pentacle, Neptunus, Stella, Lynx, Caprus, Coq, Equus</strong> et <strong style="color:var(--gold-light);">Aigle</strong> — sous-tendus par des figures animales, mathématiques, mythologiques et cosmiques.</p>
+    <p>Sur le Nodiaque, la figure centrale de la Noastrologie, on les découvre illustrés par leurs symboles.</p>
+
+    <div class="subsection">
+      <h3>Caractéristiques des Signes</h3>
+      <p>Tour à tour féminin puis masculin, chaque Signe est accompagné d'une symbolique associée qui détermine son environnement, sa coloration.</p>
+      <p>Ce sont les Éléments (la Pierre, le Métal, l'Eau…), les Astres (Mars, Saturne, Lune…), une Défluence (le Défi, la Stabilité, la Naissance…), et secondairement une couleur, un minéral, un numéral…</p>
+    </div>
+  </div>
+
+  <!-- 3. Le Schème Noastral -->
+  <div class="chapter reveal" id="scheme">
+    <p class="chapter-num">3</p>
+    <h2>Le Schème Noastral</h2>
+    <div class="chapter-divider"></div>
+    <p>Au cœur de la Noastrologie se trouve le Schème Noastral, la représentation symbolique d'un moment.</p>
+    <p>Nous pouvons lire et commenter cette figure, mais elle ne projette jamais ce qui va arriver. Elle permet seulement d'observer comment les choses pourraient se disposer. Ce Schème peut servir à marquer ou symboliser un projet, une naissance, une rencontre, un mariage, tout événement que l'on choisit de considérer comme significatif.</p>
+    <p>Ce Schème ne raconte donc pas un devenir, il éclaire un climat, une configuration de forces, un équilibre entre différentes dynamiques, il se construit à partir d'une simple date. Ce qu'il explore n'est pas le ciel physique, mais ses équivalents symboliques.</p>
+  </div>
+
+  <!-- 4. Le Nodiaque -->
+  <div class="chapter reveal" id="nodiaque">
+    <p class="chapter-num">4</p>
+    <h2>Le Nodiaque</h2>
+    <div class="chapter-divider"></div>
+    <p>Le cercle central de la Noastrologie est le Nodiaque des douze signes associés aux douze mois de l'année. Chaque Signe est caractérisé en premier lieu par :</p>
+    <div class="subsection">
+      <h3>Les trois piliers de chaque Signe</h3>
+      <p><strong style="color:var(--gold-light);">Son Élément</strong> — sa texture symbolique.</p>
+      <p><strong style="color:var(--gold-light);">Son Astre</strong> — le principe dynamique.</p>
+      <p><strong style="color:var(--gold-light);">Sa Défluence</strong> — l'inclination dominante.</p>
+      <p>Mais surtout son Fondamental, qui est sa relation avec le monde.</p>
+    </div>
+    <p>Les Astres, au nombre de treize, ont pour noms ceux des planètes du système solaire, la Lune, le Soleil, Terra notre planète, et Astérydes représentant la ceinture de milliers d'astéroïdes qui gravitent entre Jupiter et Saturne. Outre ces Astres apparaît Alpha, qui caractérise l'année, et Axandans qui figure la projection angulaire de la Terre.</p>
+    <p>Les Signes ne sont ni bons ni mauvais, ils décrivent des manières d'être au monde.</p>
+  </div>
+
+  <!-- 5. Les Fondamentaux -->
+  <div class="chapter reveal" id="fondamentaux">
+    <p class="chapter-num">5</p>
+    <h2>Les Fondamentaux</h2>
+    <div class="chapter-divider"></div>
+    <p>Ce sont les moteurs centraux des Signes, définissant des attitudes. Ils unissent les douze signes de l'année trois par trois. Ce ne sont pas des catégories psychologiques, mais des modes de relation au réel. Ils permettent de comprendre comment un Signe, ou un Schème, se positionne avant l'action, dans l'expérience, dans le mouvement, ou dans la construction. Ils donnent au Nodiaque sa profondeur et sa cohérence, évitent une lecture fragmentée pour une vision d'ensemble.</p>
+    <div class="fondamentaux">
+      <div class="fondamental-card">
+        <h4>Penser</h4>
+        <div class="signes">Licorne · Pentacle · Caprus</div>
+        <p>Conceptualiser, imaginer, projeter. Avant d'agir, analyser, réfléchir, comprendre.</p>
+      </div>
+      <div class="fondamental-card">
+        <h4>Être</h4>
+        <div class="signes">Quadran · Neptunus · Coq</div>
+        <p>Se préoccuper de son existence, de sa propre personne. Attentif à ce que la vie offre.</p>
+      </div>
+      <div class="fondamental-card">
+        <h4>Agir</h4>
+        <div class="signes">Serpent · Stella · Equus</div>
+        <p>Se mettre en mouvement. Les signes de cette catégorie sont actifs — ils "font".</p>
+      </div>
+      <div class="fondamental-card">
+        <h4>Réaliser</h4>
+        <div class="signes">Buffle · Lynx · Aigle</div>
+        <p>Être constructif, dur à la tâche, patient. Garder en ligne de mire un but à atteindre.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Les 12 Signes ── -->
+
+  <!-- 1 Licorne -->
+  <div class="chapter reveal" id="licorne">
+    <p class="chapter-num">1 — Janvier</p>
+    <h2>La Licorne</h2>
+    <div class="chapter-divider"></div>
+    <p>La Licorne, premier Signe de l'année, ouvre le Nodiaque. Elle ne le fait pas en force, mais par écart. Être Licorne, ce n'est pas vouloir être au-dessus, c'est vouloir être ailleurs. Là où quelque chose commence, où la forme n'est pas encore fixée, la Licorne incarne le moment où une idée surgit avant d'être partagée, comprise, validée. Elle avance souvent seule, non par mépris des autres, mais parce que le chemin n'existe pas encore.</p>
+    <div class="meta-band">
+      <div class="meta-pill"><span class="mp-label">Défluence</span><span class="mp-value">Le Défi</span></div>
+      <div class="meta-pill"><span class="mp-label">Fondamental</span><span class="mp-value">Penser</span></div>
+      <div class="meta-pill"><span class="mp-label">Élément</span><span class="mp-value">Cristal</span></div>
+      <div class="meta-pill"><span class="mp-label">Numéral</span><span class="mp-value">1</span></div>
+      <div class="meta-pill"><span class="mp-label">Astre</span><span class="mp-value">Saturne</span></div>
+    </div>
+    <div class="subsection">
+      <h3>Sa Défluence : le Défi</h3>
+      <p>La Licorne est attirée par ce qui résiste, ce qui semble difficile, improbable, inexploré. Elle n'est pas toujours consciente de ce moteur intérieur, mais instinctivement elle se détourne de ce qui est déjà acquis. Dans sa forme fluide, il pousse la Licorne à inventer, à chercher, à explorer pour ouvrir de nouvelles voies. Dans une forme plus aride, ce défi isole, devient agressif et peut s'exprimer par une opposition systématique ou une quête sans but.</p>
+    </div>
+    <p>La Licorne appartient au Fondamental du Penser. Elle n'agit pas d'abord sur le monde, mais sur ses représentations. Elle conceptualise, imagine, projette. Avant d'agir, elle veut analyser, réfléchir, comprendre, décortiquer, elle veut éclairer. Son Élément est le Cristal — transparence et complexité. De l'extérieur, la Licorne peut sembler claire, directe, même tranchante, mais son monde intérieur est en facettes multiples, quelquefois contradictoires.</p>
+    <p>Son Astre associé est Saturne — rigueur, concentration, exigence — qui tempère l'élan du Défi par une nécessité de structure, de retenue.</p>
+    <div class="scheme-card">
+      <h3>La Licorne dans un Schème Noastral</h3>
+      <div class="scheme-grid">
+        <div class="scheme-item"><div class="si-label">Dominante</div><div class="si-text">Initiative intellectuelle, originalité, désir de se démarquer. Trop tôt pour agir, mais déjà volontaire.</div></div>
+        <div class="scheme-item"><div class="si-label">Discrète</div><div class="si-text">Soutient l'ensemble par une idée directrice, invisible mais structurante.</div></div>
+        <div class="scheme-item"><div class="si-label">Bloquée</div><div class="si-text">Le Défi devient frein, peur de l'échec, refus de s'aventurer, tendance à rester dans l'abstraction.</div></div>
+      </div>
+    </div>
+    <div class="resonance">
+      <h3>Résonances et oppositions</h3>
+      <p>La Licorne résonne naturellement avec les autres signes du Penser — <strong>Pentacle</strong> et <strong>Caprus</strong>. Son signe opposé est <strong>7 Stella</strong> — là où la Licorne pense avant d'agir, Stella agit souvent à l'inverse. Leur attraction est forte, mais leur compréhension mutuelle demande un constant ajustement.</p>
+    </div>
+    <div class="synthese">
+      <p>La Licorne n'est pas faite pour suivre une voie toute tracée. Elle est là pour poser la première pierre, souvent invisible, parfois contestée. Dans la Noastrologie, la Licorne rappelle que toute construction commence par une idée qui accepte d'être seule avant d'être reconnue.</p>
+    </div>
+  </div>
+
+  <!-- 2 Quadran -->
+  <div class="chapter reveal" id="quadran">
+    <p class="chapter-num">2 — Février</p>
+    <h2>Le Quadran</h2>
+    <div class="chapter-divider"></div>
+    <p>Le Quadran n'avance pas, ne bouge pas. Il demeure. Dans le Nodiaque, Quadran représente le moment où l'existence se stabilise après l'élan initial. Là où la Licorne cherche à se distinguer, Quadran cherche à se maintenir. Quadran n'est pas immobile par faiblesse mais par fidélité. Il incarne la continuité, l'attachement à ce qui a déjà fait ses preuves, la nécessité de préserver avant de transformer.</p>
+    <div class="meta-band">
+      <div class="meta-pill"><span class="mp-label">Défluence</span><span class="mp-value">L'Immobilisme</span></div>
+      <div class="meta-pill"><span class="mp-label">Fondamental</span><span class="mp-value">Être</span></div>
+      <div class="meta-pill"><span class="mp-label">Élément</span><span class="mp-value">Pierre</span></div>
+      <div class="meta-pill"><span class="mp-label">Numéral</span><span class="mp-value">2</span></div>
+      <div class="meta-pill"><span class="mp-label">Astre</span><span class="mp-value">Pluton</span></div>
+    </div>
+    <div class="subsection">
+      <h3>Sa Défluence : l'Immobilisme</h3>
+      <p>Quadran tend naturellement à perpétuer les formes existantes, les cadres, les structures, les liens anciens. Il se méfie du changement lorsqu'il n'est pas justifié par une nécessité vitale. Dans sa forme fluide, cet immobilisme est stabilité, protection, enracinement, sécurité. Dans sa forme rigide, il peut devenir résistance, peur de perdre, repli, frein.</p>
+    </div>
+    <p>Du Fondamental de l'Être, Quadran ne cherche pas d'abord à faire ni à penser, mais à exister pleinement dans ce qui est. Son Élément est la Pierre — ce sur quoi l'on bâtit, mais aussi ce que l'on ne déplace pas sans effort. Son numéral est le chiffre deux, qui introduit la relation — Quadran cherche le duo, le couple, la complémentarité. Son Astre est Pluton, qui renforce l'intériorité, l'austérité, le rapport au mysticisme et au temps long.</p>
+    <div class="scheme-card">
+      <h3>Le Quadran dans un Schème Noastral</h3>
+      <div class="scheme-grid">
+        <div class="scheme-item"><div class="si-label">Dominant</div><div class="si-text">La continuité dirige, la fidélité aux structures existantes et leur préservation.</div></div>
+        <div class="scheme-item"><div class="si-label">Discret</div><div class="si-text">Soutient l'ensemble en offrant un socle stable.</div></div>
+        <div class="scheme-item"><div class="si-label">Bloqué</div><div class="si-text">Peur du changement, inertie, difficulté à s'ouvrir à l'inconnu.</div></div>
+      </div>
+    </div>
+    <div class="resonance">
+      <h3>Résonances et oppositions</h3>
+      <p>Quadran résonne naturellement avec <strong>Neptunus</strong> et <strong>Coq</strong>, autres Signes de l'Être. Son opposé est le <strong>Lynx</strong>, qui questionne et met en doute ce que Quadran préfère considérer comme établi.</p>
+    </div>
+    <div class="synthese">
+      <p>Quadran rappelle que toute évolution a besoin d'un point d'ancrage qui n'empêche pas le mouvement mais lui donne une base d'où partir.</p>
+    </div>
+  </div>
+
+  <!-- 3 Serpent -->
+  <div class="chapter reveal" id="serpent">
+    <p class="chapter-num">3 — Mars</p>
+    <h2>Le Serpent</h2>
+    <div class="chapter-divider"></div>
+    <p>Ce Signe ne force pas, il séduit. Le Serpent entre en mouvement, il représente l'action indirecte, l'influence subtile, le pouvoir du lien et de la parole. Il n'agit pas frontalement, il préfère contourner, convaincre, il fascine.</p>
+    <div class="meta-band">
+      <div class="meta-pill"><span class="mp-label">Défluence</span><span class="mp-value">La Séduction</span></div>
+      <div class="meta-pill"><span class="mp-label">Fondamental</span><span class="mp-value">Agir</span></div>
+      <div class="meta-pill"><span class="mp-label">Élément</span><span class="mp-value">Parole</span></div>
+      <div class="meta-pill"><span class="mp-label">Numéral</span><span class="mp-value">3</span></div>
+      <div class="meta-pill"><span class="mp-label">Astre</span><span class="mp-value">Vénus</span></div>
+    </div>
+    <div class="subsection">
+      <h3>Sa Défluence : la Séduction</h3>
+      <p>Séduire, ici, n'est pas seulement plaire, c'est attirer, capter l'attention, créer un espace relationnel. Dans sa forme fluide, la Séduction est l'intelligence sociale, l'aisance relationnelle, la capacité à relier. Dans sa forme rigide, elle peut devenir dispersion, instabilité affective, dépendance au regard des autres.</p>
+    </div>
+    <p>Le Serpent est en mouvement constant. Il agit par le langage, les idées, les relations. Son Élément est la Parole — qui relie, persuade, transforme. Son numéral est le chiffre trois, le tiers, le témoin, le jeu relationnel. Son Astre, Vénus, apporte grâce, sensibilité, attirance.</p>
+    <div class="scheme-card">
+      <h3>Le Serpent dans un Schème Noastral</h3>
+      <div class="scheme-grid">
+        <div class="scheme-item"><div class="si-label">Dominant</div><div class="si-text">Favorise les relations, la communication, la négociation.</div></div>
+        <div class="scheme-item"><div class="si-label">Discret</div><div class="si-text">Agit en arrière-plan, reliant sans s'imposer.</div></div>
+        <div class="scheme-item"><div class="si-label">Bloqué</div><div class="si-text">Difficulté à se fixer, peur de l'engagement, la dispersion.</div></div>
+      </div>
+    </div>
+    <div class="resonance">
+      <h3>Résonances et oppositions</h3>
+      <p>Le Serpent résonne avec <strong>Stella</strong> et <strong>Equus</strong>. Il est souvent attiré par Stella pour son mouvement permanent, ou par <strong>Lynx</strong>, dont le mystère l'intrigue.</p>
+    </div>
+    <div class="synthese">
+      <p>Le Serpent rappelle que l'action ne passe pas toujours par la force. Parfois, un mot, une phrase, une ondulation du verbe suffit à mettre le monde en mouvement.</p>
+    </div>
+  </div>
+
+  <!-- 4 Buffle -->
+  <div class="chapter reveal" id="buffle">
+    <p class="chapter-num">4 — Avril</p>
+    <h2>Le Buffle</h2>
+    <div class="chapter-divider"></div>
+    <p>Le Buffle avance, lentement, mais sans jamais reculer. Dans le Nodiaque, le Buffle incarne le moment où l'idée et l'élan doivent devenir effort, matière, durée. Il n'invente pas, il construit. Il ne séduit pas, il tient. Le Buffle ne cherche pas la facilité. Il cherche la solidité.</p>
+    <div class="meta-band">
+      <div class="meta-pill"><span class="mp-label">Défluence</span><span class="mp-value">La Persévérance</span></div>
+      <div class="meta-pill"><span class="mp-label">Fondamental</span><span class="mp-value">Réaliser</span></div>
+      <div class="meta-pill"><span class="mp-label">Élément</span><span class="mp-value">Terre</span></div>
+      <div class="meta-pill"><span class="mp-label">Numéral</span><span class="mp-value">4</span></div>
+      <div class="meta-pill"><span class="mp-label">Astre</span><span class="mp-value">Jupiter</span></div>
+    </div>
+    <div class="subsection">
+      <h3>Sa Défluence : la Persévérance</h3>
+      <p>Le Buffle supporte la répétition, l'effort prolongé, la contrainte. Là où d'autres se lassent, il continue. Dans sa forme fluide, la Persévérance est fiabilité, endurance, sens des responsabilités. Dans sa forme rigide, elle peut devenir entêtement, rigidité, difficulté à lâcher prise.</p>
+    </div>
+    <p>Le Buffle appartient au Fondamental du Réaliser. Son Élément est la Terre — qui demande à être travaillée, retournée, cultivée. Son numéral est le chiffre quatre, qui structure et stabilise. Son Astre est Jupiter — expansion, autorité, maturité.</p>
+    <div class="scheme-card">
+      <h3>Le Buffle dans un Schème Noastral</h3>
+      <div class="scheme-grid">
+        <div class="scheme-item"><div class="si-label">Dominant</div><div class="si-text">Appelle à la patience, à l'effort soutenu, à la construction méthodique.</div></div>
+        <div class="scheme-item"><div class="si-label">Discret</div><div class="si-text">Agit en arrière-plan, garantissant la solidité de l'ensemble.</div></div>
+        <div class="scheme-item"><div class="si-label">Bloqué</div><div class="si-text">Rigidité, refus du changement, fatigue liée à une charge trop lourde.</div></div>
+      </div>
+    </div>
+    <div class="resonance">
+      <h3>Résonances et oppositions</h3>
+      <p>Le Buffle résonne avec <strong>Lynx</strong> et <strong>Aigle</strong>. Il trouve un appui naturel auprès de Quadran et Pentacle, mais peut entrer en tension avec <strong>Coq</strong>, trop exposé et imprévisible à son goût.</p>
+    </div>
+    <div class="synthese">
+      <p>Le Buffle rappelle que rien de durable ne se construit sans effort. Il est la force tranquille du Nodiaque, celle qui transforme le temps en matière.</p>
+    </div>
+  </div>
+
+  <!-- 5 Pentacle -->
+  <div class="chapter reveal" id="pentacle">
+    <p class="chapter-num">5 — Mai</p>
+    <h2>Le Pentacle</h2>
+    <div class="chapter-divider"></div>
+    <p>Le Pentacle pense en silence. Dans le Nodiaque, il représente le moment où la réflexion devient mesure, équilibre, pondération. Là où la Licorne cherche l'écart, le Pentacle cherche la justesse. Il n'impose pas ses idées, il les polit.</p>
+    <div class="meta-band">
+      <div class="meta-pill"><span class="mp-label">Défluence</span><span class="mp-value">La Stabilité</span></div>
+      <div class="meta-pill"><span class="mp-label">Fondamental</span><span class="mp-value">Penser</span></div>
+      <div class="meta-pill"><span class="mp-label">Élément</span><span class="mp-value">Métal</span></div>
+      <div class="meta-pill"><span class="mp-label">Numéral</span><span class="mp-value">5</span></div>
+      <div class="meta-pill"><span class="mp-label">Astre</span><span class="mp-value">Uranus</span></div>
+    </div>
+    <div class="subsection">
+      <h3>Sa Défluence : la Stabilité</h3>
+      <p>Le Pentacle cherche à maintenir un équilibre intérieur et extérieur. Il préfère les systèmes cohérents aux ruptures brutales. Dans sa forme fluide, la Stabilité est discernement, constance, fiabilité intellectuelle. Dans sa forme rigide, elle peut devenir retrait, excès de prudence, difficulté à s'exposer.</p>
+    </div>
+    <p>Son Élément est le Métal — l'outil, la précision, la coupe nette. Son numéral est le chiffre cinq, chiffre de l'équilibre instable, qui oblige à ajuster sans cesse. Son Astre, Uranus, apporte lucidité, détachement, indépendance intellectuelle.</p>
+    <div class="scheme-card">
+      <h3>Le Pentacle dans un Schème Noastral</h3>
+      <div class="scheme-grid">
+        <div class="scheme-item"><div class="si-label">Dominant</div><div class="si-text">Appelle à l'analyse, à la réflexion posée, à la prise de recul.</div></div>
+        <div class="scheme-item"><div class="si-label">Discret</div><div class="si-text">Soutient par sa clarté et sa logique.</div></div>
+        <div class="scheme-item"><div class="si-label">Bloqué</div><div class="si-text">Retrait excessif, peur de l'erreur, immobilité mentale.</div></div>
+      </div>
+    </div>
+    <div class="resonance">
+      <h3>Résonances et oppositions</h3>
+      <p>Le Pentacle résonne avec <strong>Licorne</strong> et <strong>Caprus</strong>. Son signe opposé est <strong>Equus</strong>, qui agit là où le Pentacle réfléchit.</p>
+    </div>
+    <div class="synthese">
+      <p>Le Pentacle rappelle que comprendre est déjà une forme d'action. Il apporte au Nodiaque la précision, la mesure et le temps long de la pensée juste.</p>
+    </div>
+  </div>
+
+  <!-- 6 Neptunus -->
+  <div class="chapter reveal" id="neptunus">
+    <p class="chapter-num">6 — Juin</p>
+    <h2>Neptunus</h2>
+    <div class="chapter-divider"></div>
+    <p>Neptunus s'ouvre. Dans le Nodiaque, il correspond au moment où l'existence cherche à dépasser ses limites, à se relier à plus vaste qu'elle-même. Il ne se contente pas de ce qui est là. Il aspire, il pressent, il imagine. C'est le signe de l'élan vers l'idéal, qu'il soit spirituel, humain ou créatif.</p>
+    <div class="meta-band">
+      <div class="meta-pill"><span class="mp-label">Défluence</span><span class="mp-value">La Fécondité</span></div>
+      <div class="meta-pill"><span class="mp-label">Fondamental</span><span class="mp-value">Être</span></div>
+      <div class="meta-pill"><span class="mp-label">Élément</span><span class="mp-value">Eau</span></div>
+      <div class="meta-pill"><span class="mp-label">Numéral</span><span class="mp-value">6</span></div>
+      <div class="meta-pill"><span class="mp-label">Astre</span><span class="mp-value">Neptune</span></div>
+    </div>
+    <div class="subsection">
+      <h3>Sa Défluence : la Fécondité</h3>
+      <p>Fécondité de la pensée, des émotions, des projets, des relations. Neptunus a le besoin profond de faire naître quelque chose, de transmettre, de laisser une trace vivante. Dans sa forme fluide, la Fécondité est créativité, générosité, inspiration. Dans sa forme rigide, elle peut devenir dispersion, excès d'émotion, difficulté à poser des limites.</p>
+    </div>
+    <p>Neptunus appartient au Fondamental de l'Être. Il ressent avant de comprendre, perçoit avant d'agir. Son Élément est l'Eau — sensibilité, fluidité, capacité d'adaptation. Son numéral est le chiffre six, une double trinité, chiffre d'harmonie et de relation. Son Astre, Neptune, renforce l'intuition, l'imaginaire, le rêve.</p>
+    <div class="scheme-card">
+      <h3>Neptunus dans un Schème Noastral</h3>
+      <div class="scheme-grid">
+        <div class="scheme-item"><div class="si-label">Dominant</div><div class="si-text">Créativité, intuition, quête de sens.</div></div>
+        <div class="scheme-item"><div class="si-label">Discret</div><div class="si-text">Adoucit l'ensemble, apporte sensibilité et compréhension.</div></div>
+        <div class="scheme-item"><div class="si-label">Bloqué</div><div class="si-text">Confusion, fuite, excès de rêve sans ancrage.</div></div>
+      </div>
+    </div>
+    <div class="resonance">
+      <h3>Résonances et oppositions</h3>
+      <p>Neptunus résonne naturellement avec <strong>Quadran</strong> et <strong>Coq</strong>. Il est souvent attiré par <strong>Pentacle</strong> pour sa rigueur, ou par <strong>Serpent</strong>, dont la séduction l'enchante.</p>
+    </div>
+    <div class="synthese">
+      <p>Neptunus rappelle que toute existence cherche à se relier à quelque chose de plus grand qu'elle. Il est le souffle sensible du Nodiaque.</p>
+    </div>
+  </div>
+
+  <!-- 7 Stella -->
+  <div class="chapter reveal" id="stella">
+    <p class="chapter-num">7 — Juillet</p>
+    <h2>Stella</h2>
+    <div class="chapter-divider"></div>
+    <p>Stella bouge. Dans le Nodiaque, Stella correspond au moment où l'action devient mobile, instable, parfois imprévisible. Elle ne suit pas un trajet rectiligne. Elle change, s'adapte, bifurque. Stella est le signe du mouvement permanent et de la communication vive, elle ne s'installe pas. Elle circule.</p>
+    <div class="meta-band">
+      <div class="meta-pill"><span class="mp-label">Défluence</span><span class="mp-value">La Mobilité</span></div>
+      <div class="meta-pill"><span class="mp-label">Fondamental</span><span class="mp-value">Agir</span></div>
+      <div class="meta-pill"><span class="mp-label">Élément</span><span class="mp-value">Sable</span></div>
+      <div class="meta-pill"><span class="mp-label">Numéral</span><span class="mp-value">7</span></div>
+      <div class="meta-pill"><span class="mp-label">Astre</span><span class="mp-value">Astérydes</span></div>
+    </div>
+    <div class="subsection">
+      <h3>Sa Défluence : la Mobilité</h3>
+      <p>Stella a besoin de mouvement, de variété, de renouvellement. Elle s'ennuie vite dans les formes figées. Dans sa forme fluide, la Mobilité est adaptabilité, curiosité, ouverture. Dans sa forme rigide, elle peut devenir instabilité, dispersion, difficulté à s'engager.</p>
+    </div>
+    <p>Son Élément est le Sable — qui glisse, se déplace, ne se fixe jamais longtemps. Son numéral est le chiffre sept, chiffre de passage, associé à l'énigme et à l'excentricité. Son Astre, Astérydes, symbolise la multitude des trajectoires, les étoiles filantes.</p>
+    <div class="scheme-card">
+      <h3>Stella dans un Schème Noastral</h3>
+      <div class="scheme-grid">
+        <div class="scheme-item"><div class="si-label">Dominante</div><div class="si-text">Changement, mobilité, urgence d'agir.</div></div>
+        <div class="scheme-item"><div class="si-label">Discrète</div><div class="si-text">Facilite les transitions et les ajustements.</div></div>
+        <div class="scheme-item"><div class="si-label">Bloquée</div><div class="si-text">Agitation, nervosité, difficulté à trouver un point d'ancrage.</div></div>
+      </div>
+    </div>
+    <div class="resonance">
+      <h3>Résonances et oppositions</h3>
+      <p>Stella résonne avec le <strong>Serpent</strong> et <strong>Equus</strong>. Son signe opposé est <strong>Licorne</strong>, dont la profondeur et la lenteur peuvent la désarçonner, mais aussi l'attirer.</p>
+    </div>
+    <div class="synthese">
+      <p>Stella rappelle que le mouvement est parfois une fin en soi. Elle est l'étoile filante du Nodiaque — visible, brève, changeante.</p>
+    </div>
+  </div>
+
+  <!-- 8 Lynx -->
+  <div class="chapter reveal" id="lynx">
+    <p class="chapter-num">8 — Août</p>
+    <h2>Le Lynx</h2>
+    <div class="chapter-divider"></div>
+    <p>Le Lynx observe. Dans le Nodiaque, le Lynx correspond au moment où l'action se suspend pour laisser place au regard lucide. Rien ne lui échappe vraiment. Il voit ce qui est montré, mais surtout ce qui est dissimulé. Le Lynx n'est pas pressé. Il guette.</p>
+    <div class="meta-band">
+      <div class="meta-pill"><span class="mp-label">Défluence</span><span class="mp-value">L'Acuité</span></div>
+      <div class="meta-pill"><span class="mp-label">Fondamental</span><span class="mp-value">Réaliser</span></div>
+      <div class="meta-pill"><span class="mp-label">Élément</span><span class="mp-value">Verre</span></div>
+      <div class="meta-pill"><span class="mp-label">Numéral</span><span class="mp-value">8</span></div>
+      <div class="meta-pill"><span class="mp-label">Astre</span><span class="mp-value">Lune</span></div>
+    </div>
+    <div class="subsection">
+      <h3>Sa Défluence : l'Acuité</h3>
+      <p>Le Lynx est naturellement attiré par les détails, les zones d'ombre, les incohérences. Il cherche à comprendre ce qui se cache derrière les apparences. Dans sa forme fluide, l'Acuité est perspicacité, intelligence critique, discernement. Dans sa forme rigide, elle peut devenir suspicion, anxiété, excès de contrôle.</p>
+    </div>
+    <p>Son Élément est le Verre — transparent, mais fragile. Il laisse passer la lumière et peut se briser. Son numéral est le chiffre huit, qui évoque la continuité et la boucle. Son Astre, la Lune, renforce l'intuition, la sensibilité, le rapport au subconscient.</p>
+    <div class="scheme-card">
+      <h3>Le Lynx dans un Schème Noastral</h3>
+      <div class="scheme-grid">
+        <div class="scheme-item"><div class="si-label">Dominant</div><div class="si-text">Vigilance, analyse fine, prudence.</div></div>
+        <div class="scheme-item"><div class="si-label">Discret</div><div class="si-text">Éclaire les zones floues sans intervenir directement.</div></div>
+        <div class="scheme-item"><div class="si-label">Bloqué</div><div class="si-text">Doute excessif, peur de l'erreur, position en retrait.</div></div>
+      </div>
+    </div>
+    <div class="resonance">
+      <h3>Résonances et oppositions</h3>
+      <p>Le Lynx résonne avec <strong>Buffle</strong> et <strong>Aigle</strong>. Son signe opposé est le <strong>Quadran</strong>, qui préfère la stabilité aux remises en question.</p>
+    </div>
+    <div class="synthese">
+      <p>Le Lynx rappelle que voir clair est déjà une forme d'action. Il est le regard aigu du Nodiaque qui détecte les non-dits, les erreurs et les vices cachés.</p>
+    </div>
+  </div>
+
+  <!-- 9 Caprus -->
+  <div class="chapter reveal" id="caprus">
+    <p class="chapter-num">9 — Septembre</p>
+    <h2>Caprus</h2>
+    <div class="chapter-divider"></div>
+    <p>L'équilibre. Dans le Nodiaque, Caprus correspond au moment où la réflexion devient médiation, justice, harmonie recherchée. Elle avance prudemment, mais avec assurance. Caprus la chèvre n'aime ni les excès ni les ruptures. Elle cherche la voie médiane.</p>
+    <div class="meta-band">
+      <div class="meta-pill"><span class="mp-label">Défluence</span><span class="mp-value">L'Équité</span></div>
+      <div class="meta-pill"><span class="mp-label">Fondamental</span><span class="mp-value">Penser</span></div>
+      <div class="meta-pill"><span class="mp-label">Élément</span><span class="mp-value">Bois</span></div>
+      <div class="meta-pill"><span class="mp-label">Numéral</span><span class="mp-value">9</span></div>
+      <div class="meta-pill"><span class="mp-label">Astre</span><span class="mp-value">Terra</span></div>
+    </div>
+    <div class="subsection">
+      <h3>Sa Défluence : l'Équité</h3>
+      <p>Caprus tend naturellement à peser le pour et le contre, à écouter toutes les voix, à rechercher une solution juste. Dans sa forme fluide, l'Équité est sens de la justice, diplomatie, responsabilité collective. Dans sa forme rigide, elle peut devenir indécision, compromis excessif, difficulté à trancher.</p>
+    </div>
+    <p>Son Élément est le Bois — qui pousse, s'adapte, plie sans rompre. Son numéral est le chiffre neuf, d'accomplissement et de sagesse. Son Astre, Terra, ancre le signe dans le concret, le réel, le sens commun.</p>
+    <div class="scheme-card">
+      <h3>Caprus dans un Schème Noastral</h3>
+      <div class="scheme-grid">
+        <div class="scheme-item"><div class="si-label">Dominante</div><div class="si-text">Équilibre, négociation, recherche d'une solution juste.</div></div>
+        <div class="scheme-item"><div class="si-label">Discrète</div><div class="si-text">Harmonise sans se rendre visible.</div></div>
+        <div class="scheme-item"><div class="si-label">Bloquée</div><div class="si-text">Indécision, peur de l'erreur morale, dispersion.</div></div>
+      </div>
+    </div>
+    <div class="resonance">
+      <h3>Résonances et oppositions</h3>
+      <p>Caprus résonne avec <strong>Licorne</strong> et <strong>Pentacle</strong>. Elle trouve une stabilité durable avec Quadran ou Pentacle, et peut être attirée par l'élan de <strong>Neptunus</strong>.</p>
+    </div>
+    <div class="synthese">
+      <p>Caprus rappelle que penser, c'est aussi assumer la responsabilité de choisir. Elle est l'équilibre vivant du Nodiaque.</p>
+    </div>
+  </div>
+
+  <!-- 10 Coq -->
+  <div class="chapter reveal" id="coq">
+    <p class="chapter-num">10 — Octobre</p>
+    <h2>Le Coq</h2>
+    <div class="chapter-divider"></div>
+    <p>Le Coq se montre. Dans le Nodiaque, le Coq correspond au moment où l'existence cherche à rayonner, à être vue, reconnue, affirmée. Il ne se cache pas. Il se dresse, appelle, signale sa présence. Le Coq n'est pas discret, il est visible.</p>
+    <div class="meta-band">
+      <div class="meta-pill"><span class="mp-label">Défluence</span><span class="mp-value">La Naissance</span></div>
+      <div class="meta-pill"><span class="mp-label">Fondamental</span><span class="mp-value">Être</span></div>
+      <div class="meta-pill"><span class="mp-label">Élément</span><span class="mp-value">Lumière</span></div>
+      <div class="meta-pill"><span class="mp-label">Numéral</span><span class="mp-value">10</span></div>
+      <div class="meta-pill"><span class="mp-label">Astre</span><span class="mp-value">Soleil</span></div>
+    </div>
+    <div class="subsection">
+      <h3>Sa Défluence : la Naissance</h3>
+      <p>De projets, d'idées, d'identités. Le Coq aime ce qui commence, ce qui attire l'attention, ce qui émerge au grand jour. Dans sa forme fluide, la Naissance est affirmation de soi, créativité, vitalité. Dans sa forme rigide, elle peut devenir vanité, besoin excessif de reconnaissance, dépendance au regard des autres.</p>
+    </div>
+    <p>Son Élément est la Lumière — qui éclaire, révèle, attire le regard. Son numéral est le chiffre 10, qui marque l'aboutissement d'un cycle et l'ouverture d'un autre. Son Astre, le Soleil, renforce la vitalité, la confiance, l'affirmation de soi.</p>
+    <div class="scheme-card">
+      <h3>Le Coq dans un Schème Noastral</h3>
+      <div class="scheme-grid">
+        <div class="scheme-item"><div class="si-label">Dominant</div><div class="si-text">Visibilité, expression, affirmation publique.</div></div>
+        <div class="scheme-item"><div class="si-label">Discret</div><div class="si-text">Soutient par son énergie et son éclat.</div></div>
+        <div class="scheme-item"><div class="si-label">Bloqué</div><div class="si-text">Frustration liée au manque de reconnaissance, surcompensation.</div></div>
+      </div>
+    </div>
+    <div class="resonance">
+      <h3>Résonances et oppositions</h3>
+      <p>Le Coq résonne avec <strong>Quadran</strong> et <strong>Neptunus</strong>. Il est souvent attiré par <strong>Equus</strong>, actif et flamboyant, ou par <strong>Lynx</strong>, dont la profondeur le fascine.</p>
+    </div>
+    <div class="synthese">
+      <p>Le Coq rappelle que toute existence a besoin d'être reconnue pour se déployer pleinement. Il est la voix claire du Nodiaque.</p>
+    </div>
+  </div>
+
+  <!-- 11 Equus -->
+  <div class="chapter reveal" id="equus">
+    <p class="chapter-num">11 — Novembre</p>
+    <h2>Equus</h2>
+    <div class="chapter-divider"></div>
+    <p>Equus fonce. Dans le Nodiaque, il correspond au moment où l'action devient urgence, passion, dépassement. Il ne calcule pas longtemps. Il part. Il n'avance pas à petits pas. Il galope.</p>
+    <div class="meta-band">
+      <div class="meta-pill"><span class="mp-label">Défluence</span><span class="mp-value">La Violence</span></div>
+      <div class="meta-pill"><span class="mp-label">Fondamental</span><span class="mp-value">Agir</span></div>
+      <div class="meta-pill"><span class="mp-label">Élément</span><span class="mp-value">Feu</span></div>
+      <div class="meta-pill"><span class="mp-label">Numéral</span><span class="mp-value">11</span></div>
+      <div class="meta-pill"><span class="mp-label">Astre</span><span class="mp-value">Mercure</span></div>
+    </div>
+    <div class="subsection">
+      <h3>Sa Défluence : la Violence</h3>
+      <p>Au sens d'intensité, d'énergie brute, de passion. Equus agit avec force, parfois sans mesure. Dans sa forme fluide, la Violence est courage, énergie, engagement total. Dans sa forme rigide, elle peut devenir impulsivité, conflits, épuisement.</p>
+    </div>
+    <p>Son Élément est le Feu — qui réchauffe, éclaire, mais peut aussi dévaster. Son numéral est le chiffre onze, qui dédouble l'élan du un. Son Astre, Mercure, apporte vitesse, communication, mobilité.</p>
+    <div class="scheme-card">
+      <h3>Equus dans un Schème Noastral</h3>
+      <div class="scheme-grid">
+        <div class="scheme-item"><div class="si-label">Dominant</div><div class="si-text">Action immédiate, courage, risque.</div></div>
+        <div class="scheme-item"><div class="si-label">Discret</div><div class="si-text">Donne l'élan nécessaire pour franchir un seuil.</div></div>
+        <div class="scheme-item"><div class="si-label">Bloqué</div><div class="si-text">Colère rentrée, frustration, énergie mal canalisée.</div></div>
+      </div>
+    </div>
+    <div class="resonance">
+      <h3>Résonances et oppositions</h3>
+      <p>Equus résonne avec <strong>Serpent</strong> et <strong>Stella</strong>. Il peut construire dans la durée avec <strong>Caprus</strong> ou <strong>Neptunus</strong>, s'il accepte de ralentir.</p>
+    </div>
+    <div class="synthese">
+      <p>Equus rappelle que certaines transformations exigent de l'intensité. Il est l'élan brut et énergisant du Nodiaque.</p>
+    </div>
+  </div>
+
+  <!-- 12 Aigle -->
+  <div class="chapter reveal" id="aigle">
+    <p class="chapter-num">12 — Décembre</p>
+    <h2>L'Aigle</h2>
+    <div class="chapter-divider"></div>
+    <p>L'Aigle domine. Dans le Nodiaque, l'Aigle correspond au moment où l'action et la pensée s'élèvent pour embrasser l'ensemble. Il ne s'agite plus. Il surplombe. L'Aigle voit loin. Il vise haut.</p>
+    <div class="meta-band">
+      <div class="meta-pill"><span class="mp-label">Défluence</span><span class="mp-value">Le Pouvoir</span></div>
+      <div class="meta-pill"><span class="mp-label">Fondamental</span><span class="mp-value">Réaliser</span></div>
+      <div class="meta-pill"><span class="mp-label">Élément</span><span class="mp-value">Air</span></div>
+      <div class="meta-pill"><span class="mp-label">Numéral</span><span class="mp-value">12</span></div>
+      <div class="meta-pill"><span class="mp-label">Astre</span><span class="mp-value">Mars</span></div>
+    </div>
+    <div class="subsection">
+      <h3>Sa Défluence : le Pouvoir</h3>
+      <p>Pouvoir de décider, d'orienter, de diriger. L'Aigle cherche naturellement les positions élevées, non par vanité, mais par besoin de maîtrise. Dans sa forme fluide, le Pouvoir est autorité, vision, responsabilité. Dans sa forme rigide, il peut devenir domination excessive, froideur, isolement.</p>
+    </div>
+    <p>Son Élément est l'Air — qui porte, élève, permet la vision d'ensemble. Son numéral est le chiffre douze, qui clôt le cycle — il rassemble, synthétise, prépare un nouveau départ. Son Astre, Mars, apporte énergie, combat, détermination.</p>
+    <div class="scheme-card">
+      <h3>L'Aigle dans un Schème Noastral</h3>
+      <div class="scheme-grid">
+        <div class="scheme-item"><div class="si-label">Dominant</div><div class="si-text">Stratégie, leadership, vision globale.</div></div>
+        <div class="scheme-item"><div class="si-label">Discret</div><div class="si-text">Structure sans s'exposer directement.</div></div>
+        <div class="scheme-item"><div class="si-label">Bloqué</div><div class="si-text">Isolement, rigidité, perte de lien avec le concret.</div></div>
+      </div>
+    </div>
+    <div class="resonance">
+      <h3>Résonances et oppositions</h3>
+      <p>L'Aigle résonne avec <strong>Buffle</strong> et <strong>Lynx</strong>. Il peut entrer en rivalité avec <strong>Coq</strong>, trop visible à son goût.</p>
+    </div>
+    <div class="synthese">
+      <p>L'Aigle rappelle que toute construction a besoin d'une vision d'ensemble. Il est la hauteur finale du Nodiaque.</p>
+    </div>
+  </div>
+
+  <!-- Qu'apporte la Noastrologie -->
+  <div class="chapter reveal" id="apport">
+    <p class="chapter-num">✦</p>
+    <h2>Qu'apporte la Noastrologie ?</h2>
+    <div class="chapter-divider"></div>
+    <p>La Noastrologie n'ajoute pas un système de plus à ceux qui prétendent expliquer le monde. Elle propose un déplacement du regard.</p>
+    <p>En s'inspirant librement des grandes architectures symboliques héritées des astrologies traditionnelles, elle met en évidence une chose simple : les symboles ne valent pas par ce qu'ils prétendent dire du réel, mais par la manière dont ils organisent une lecture.</p>
+    <p>Les figures, les signes, les nombres, les astres sont des outils de représentation. Ils ne révèlent pas une vérité cachée. Ils structurent un langage.</p>
+    <p>La Noastrologie rend visible le caractère conventionnel et interchangeable de ces architectures symboliques. Elle montre qu'un système peut fonctionner sans se réclamer d'une quelconque autorité transcendante, ni d'un savoir scientifique, ni d'une croyance à adopter. En ce sens, elle ne remplace rien. Elle met à distance. Elle invite à utiliser les symboles non comme des réponses, mais comme des instruments de réflexion. Non pour croire, mais pour lire. Non pour prédire, mais pour observer.</p>
+    <p>Ce déplacement est peut-être son apport principal : rendre au symbole sa fonction première — non comme vérité, mais comme forme.</p>
+  </div>
+
+</div><!-- /essay -->
+
+<!-- Conclusion -->
+<div class="conclusion reveal" id="conclusion">
+  <h2>Sortir du cercle</h2>
+  <p>La Noastrologie ne se termine pas là où le cercle se ferme. Si ce livret a rempli son rôle, il n'aura pas cherché à expliquer le monde ni à révéler un sens caché. Il propose un cadre, un langage symbolique, une manière de regarder autrement ce que nous traversons.</p>
+  <p>Les signes de la Noastrologie ne disent pas qui nous sommes. Ils décrivent des dynamiques, des inclinations, des mouvements possibles. Le Schème Noastral ne trace pas une destinée. Il éclaire un moment, une configuration, un équilibre provisoire. Rien n'y est figé. Rien n'y est obligatoire.</p>
+  <p>La Noastrologie peut être utilisée comme un jeu sérieux, un outil de réflexion, un support de dialogue ou simplement comme une promenade symbolique. Elle n'impose aucune croyance. Elle n'attend aucune adhésion. Elle invite seulement à lire.</p>
+  <p>Lire un instant comme on lit une carte — non pour savoir où l'on ira, mais pour mieux comprendre où l'on se trouve. Lire les signes non comme des réponses, mais comme des questions bien posées.</p>
+  <p class="final">Le cercle peut maintenant s'ouvrir.</p>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>
+    <a href="index.html">Accueil</a> ·
+    <a href="signes.html">Les Signes</a> ·
+    <span style="opacity:.4;">Les Astres &amp; Éléments</span> ·
+    <span style="opacity:.4;">Votre Schème</span> ·
+    <a href="noastrologie.html">Noastrologie</a>
+  </p>
+  <p style="margin-top:8px;font-size:.62rem;font-family:'Lato',sans-serif;font-weight:300;letter-spacing:.04em;">
+    © 2014–2026 Jean-Michel Reboul (JMR) — Noastrologie / Nowastrology · Tous droits réservés
+  </p>
+</footer>
+
+</div><!-- /content -->
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
