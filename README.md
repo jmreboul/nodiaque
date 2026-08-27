@@ -1,10 +1,10 @@
 # Nodiaque
 
-Système cosmologique personnel — calculateur de schème noastral pour le Nodiaque.
+Système cosmologique personnel — Calculateur de Schème Noastral pour le Nodiaque.
 
 ## Utilisation
 
-Entrez une date et une heure pour générer le Schème Noastral correspondant.
+Il faut renseigner une date et une heure pour générer le Schème Noastral correspondant.
 
 ## Accès
 
