@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Les Astres de la Noastrologie — Les 13 astres et leurs maîtrises">
+<title>Les Astres — Noastrologie</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a1a5a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:#d4a840; --gold-light:#f0c860; --red-dark:#8b1a1a;
+  --text-main:#ddeeff; --text-muted:#8899bb; --text-accent:#aaccff;
+  --border:rgba(100,140,255,0.25); --pill-bg:rgba(15,15,100,0.88);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Lato',sans-serif;background:#04040f;color:var(--text-main);min-height:100vh;overflow-x:hidden;}
+.cosmos-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse at 30% 25%,rgba(58,32,160,.35) 0%,transparent 55%),
+             radial-gradient(ellipse at 70% 75%,rgba(32,8,128,.30) 0%,transparent 55%),
+             radial-gradient(ellipse at 50% 50%,#1a1a5a 0%,#0d0d3a 40%,#04040f 100%);}
+.stars{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.stars::before{content:'';position:absolute;inset:0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%,white 0%,transparent 100%),
+    radial-gradient(1.2px 1.2px at 28% 42%,rgba(200,210,255,.9) 0%,transparent 100%),
+    radial-gradient(1.8px 1.8px at 45%  8%,white 0%,transparent 100%),
+    radial-gradient(1.0px 1.0px at 62% 31%,rgba(255,220,220,.8) 0%,transparent 100%),
+    radial-gradient(1.4px 1.4px at 78% 55%,white 0%,transparent 100%),
+    radial-gradient(0.9px 0.9px at 88% 12%,rgba(200,210,255,.9) 0%,transparent 100%),
+    radial-gradient(1.6px 1.6px at  5% 72%,white 0%,transparent 100%),
+    radial-gradient(1.1px 1.1px at 35% 88%,rgba(255,210,210,.8) 0%,transparent 100%),
+    radial-gradient(1.3px 1.3px at 55% 65%,white 0%,transparent 100%),
+    radial-gradient(0.8px 0.8px at 92% 82%,rgba(200,220,255,.9) 0%,transparent 100%);}
+.content{position:relative;z-index:1;}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:100;background:rgba(4,4,20,.90);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;
+  justify-content:space-between;height:56px;}
+.nav-logo{font-family:'Cinzel',serif;font-size:.95rem;font-weight:700;color:var(--gold);
+  letter-spacing:.12em;text-decoration:none;white-space:nowrap;}
+.nav-links{display:flex;gap:4px;list-style:none;flex-wrap:wrap;}
+.nav-links a{font-family:'Cinzel',serif;font-size:.68rem;font-weight:600;color:var(--text-accent);
+  text-decoration:none;padding:5px 9px;border-radius:5px;letter-spacing:.07em;
+  transition:background .2s,color .2s;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{background:var(--pill-bg);color:white;}
+.nav-links a.cta{background:var(--red-dark);color:white;margin-left:6px;font-weight:700;}
+.nav-links a.cta:hover{background:#a02020;}
+.nav-links a.wip{opacity:.45;cursor:default;}
+
+/* Page header */
+.page-header{text-align:center;padding:60px 24px 40px;}
+.page-header .eyebrow{font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;
+  letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
+.page-header h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,5vw,3rem);
+  font-weight:600;color:white;letter-spacing:.06em;margin-bottom:10px;}
+.page-header p{font-size:.95rem;color:var(--text-muted);max-width:640px;margin:0 auto;
+  line-height:1.75;font-weight:300;font-style:italic;}
+
+/* Intro box */
+.intro-box{max-width:800px;margin:0 auto 50px;padding:0 24px;}
+.intro-inner{background:rgba(10,10,50,.7);border:1px solid var(--border);
+  border-radius:12px;padding:24px 28px;}
+.intro-inner p{font-size:.92rem;line-height:1.85;color:var(--text-main);font-weight:300;margin-bottom:12px;}
+.intro-inner p:last-child{margin-bottom:0;}
+.intro-inner strong{color:var(--gold-light);}
+
+/* Anchor nav */
+.anchor-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  padding:0 24px 40px;max-width:1000px;margin:0 auto;}
+.anchor-nav a{font-family:'Cinzel',serif;font-size:.68rem;font-weight:600;
+  color:white;text-decoration:none;padding:5px 12px;border-radius:16px;
+  border:1px solid var(--border);background:var(--pill-bg);letter-spacing:.06em;
+  transition:all .2s;}
+.anchor-nav a:hover{border-color:rgba(140,180,255,.5);background:rgba(25,25,120,.95);}
+
+/* Astre cards */
+.astres-container{max-width:900px;margin:0 auto;padding:0 24px 80px;
+  display:flex;flex-direction:column;gap:32px;}
+
+.astre-card{background:rgba(8,8,40,.75);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;scroll-margin-top:80px;
+  display:flex;flex-direction:row;}
+
+.astre-picto{width:110px;min-width:110px;display:flex;align-items:center;
+  justify-content:center;background:rgba(15,15,60,.6);border-right:1px solid var(--border);
+  padding:20px 10px;}
+
+.astre-content{padding:22px 26px;flex:1;}
+
+.astre-header{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px;}
+.astre-name{font-family:'Cinzel',serif;font-size:clamp(1.2rem,3vw,1.6rem);
+  font-weight:700;color:white;letter-spacing:.05em;}
+.astre-maitrise{font-family:'Cinzel',serif;font-size:.78rem;font-weight:600;
+  color:var(--gold);letter-spacing:.1em;padding:3px 10px;border-radius:12px;
+  border:1px solid rgba(212,168,64,.35);background:rgba(80,50,0,.3);}
+.astre-periode{font-size:.75rem;color:var(--text-muted);font-style:italic;
+  letter-spacing:.05em;margin-bottom:14px;}
+.astre-texte{font-size:.9rem;line-height:1.82;color:var(--text-main);font-weight:300;}
+
+/* Footer */
+footer{border-top:1px solid var(--border);text-align:center;padding:24px;
+  font-size:.7rem;color:var(--text-muted);font-family:'Cinzel',serif;letter-spacing:.07em;}
+footer a{color:var(--text-accent);text-decoration:none;}
+footer a:hover{color:white;}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s;}
+.reveal.visible{opacity:1;transform:none;}
+
+@media(max-width:640px){
+  nav{padding:0 10px;}
+  .nav-links a{font-size:.58rem;padding:4px 5px;}
+  .nav-logo{font-size:.8rem;}
+  .astre-card{flex-direction:column;}
+  .astre-picto{width:100%;min-width:unset;border-right:none;border-bottom:1px solid var(--border);
+    padding:16px;flex-direction:row;gap:12px;}
+}
+</style>
+</head>
+<body>
+<div class="cosmos-bg"></div>
+<div class="stars"></div>
+<div class="content">
+
+<nav>
+  <a href="index.html" class="nav-logo">✦ Noastrologie</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="signes.html">Les Signes</a></li>
+    <li><a href="astres.html" class="active">Les Astres</a></li>
+    <li><a href="noastrologie.html" class="cta">Noastrologie</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <p class="eyebrow">Noastrologie · Nowastrology</p>
+  <h1>Les Astres</h1>
+  <p>Treize astres parcourent le Nodiaque, chacun à sa propre vitesse — de Terra qui boucle sa révolution en une journée à Pluton qui met 239 ans.</p>
+</div>
+
+<!-- Intro -->
+<div class="intro-box">
+  <div class="intro-inner reveal">
+    <p>En dehors de l'Alpha, les Astres de la Noastrologie sont les équivalents des planètes du Système solaire, avec deux Astres qui lui sont propres : <strong>Terra</strong> parcourt le Nodiaque en une journée, <strong>Astérydes</strong> effectue une révolution complète en 7 ans. Les périodes de révolution des Astres sont des nombres premiers.</p>
+    <p>Le Soleil parcourt le Nodiaque en une année, Terra en 24 heures, la Lune (29 jours), Mercure (89 jours), Vénus (223 jours), Mars (691 jours), Astérydes (7 ans), Jupiter (11 ans), Saturne (31 ans), Uranus (83 ans), Neptune (163 ans), Pluton (239 ans).</p>
+    <p>Chaque Astre est associé à un Signe dont il est en <strong>maîtrise</strong>. On ne s'étonnera donc pas de retrouver des caractéristiques convergentes entre les Astres et les Signes dont ils sont maîtres.</p>
+  </div>
+</div>
+
+<!-- Anchor nav -->
+<div class="anchor-nav">
+  <a href="#saturne">Saturne</a>
+  <a href="#pluton">Pluton</a>
+  <a href="#venus">Vénus</a>
+  <a href="#jupiter">Jupiter</a>
+  <a href="#uranus">Uranus</a>
+  <a href="#neptune">Neptune</a>
+  <a href="#asterydes">Astérydes</a>
+  <a href="#lune">Lune</a>
+  <a href="#terra">Terra</a>
+  <a href="#soleil">Soleil</a>
+  <a href="#mercure">Mercure</a>
+  <a href="#mars">Mars</a>
+  <a href="#alpha">Alpha</a>
+</div>
+
+<div class="astres-container">
+
+  <!-- Saturne / Licorne -->
+  <div class="astre-card reveal" id="saturne">
+    <div class="astre-picto">
+      <svg viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="36" r="18" fill="none" stroke="#aaccff" stroke-width="1.6"/>
+        <ellipse cx="40" cy="36" rx="32" ry="10" fill="none" stroke="#d4a840" stroke-width="1.4"/>
+        <circle cx="40" cy="36" r="3" fill="#aaccff"/>
+        <line x1="40" y1="54" x2="40" y2="68" stroke="#aaccff" stroke-width="1.4"/>
+        <line x1="32" y1="62" x2="48" y2="62" stroke="#aaccff" stroke-width="1.4"/>
+      </svg>
+    </div>
+    <div class="astre-content">
+      <div class="astre-header">
+        <span class="astre-name">Saturne</span>
+        <span class="astre-maitrise">Maître de Licorne</span>
+      </div>
+      <p class="astre-periode">Révolution : 31 ans · Signe : Janvier</p>
+      <p class="astre-texte">Le plus bel Astre sans conteste, dont l'anneau coloré est symbole d'orgueil, de réussite, de rayonnement et d'étonnement. Saturne c'est l'apparence, mais aussi la méthode, la discipline, la concentration, voire l'ascèse. Saturne est rangé, structuré, visible aux yeux de tous, paré de sa ceinture d'ornements. C'est un architecte apportant de la rigueur et de l'autorité, des qualités d'ordonnancement et de structuration. Il établit les règles, maîtrise les limitations et montre de l'autorité.</p>
+    </div>
+  </div>
+
+  <!-- Pluton / Quadran -->
+  <div class="astre-card reveal" id="pluton">
+    <div class="astre-picto">
+      <svg viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="32" r="16" fill="none" stroke="#aaccff" stroke-width="1.6"/>
+        <circle cx="40" cy="32" r="7" fill="none" stroke="#aaccff" stroke-width="1.2"/>
+        <circle cx="40" cy="32" r="2.5" fill="#aaccff"/>
+        <line x1="40" y1="48" x2="40" y2="64" stroke="#aaccff" stroke-width="1.4"/>
+        <line x1="30" y1="57" x2="50" y2="57" stroke="#aaccff" stroke-width="1.4"/>
+      </svg>
+    </div>
+    <div class="astre-content">
+      <div class="astre-header">
+        <span class="astre-name">Pluton</span>
+        <span class="astre-maitrise">Maître de Quadran</span>
+      </div>
+      <p class="astre-periode">Révolution : 239 ans · Signe : Février</p>
+      <p class="astre-texte">Maître des forces souterraines, le mysticisme et l'austérité sont les dominantes de cet Astre, qui gouverne la mort et la renaissance comme la figure du Phénix. Attaché à l'ordre et à la tradition, il demeure, mais a une tendance à l'attentisme, voire la paresse, quelquefois jusqu'au découragement. Il reste attaché aussi aux traditions, à l'ordre, à la religion.</p>
+    </div>
+  </div>
+
+  <!-- Vénus / Serpent -->
+  <div class="astre-card reveal" id="venus">
+    <div class="astre-picto">
+      <svg viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="28" r="18" fill="none" stroke="#aaccff" stroke-width="1.6"/>
+        <line x1="40" y1="46" x2="40" y2="66" stroke="#aaccff" stroke-width="1.4"/>
+        <line x1="28" y1="57" x2="52" y2="57" stroke="#aaccff" stroke-width="1.4"/>
+      </svg>
+    </div>
+    <div class="astre-content">
+      <div class="astre-header">
+        <span class="astre-name">Vénus</span>
+        <span class="astre-maitrise">Maître de Serpent</span>
+      </div>
+      <p class="astre-periode">Révolution : 223 jours · Signe : Mars</p>
+      <p class="astre-texte">Planète du plaisir au sens large, Vénus cultive la beauté, l'art, l'esthétique et symbolise l'amour, les sentiments, la sensibilité, la séduction, la féminité. Expression créatrice du bonheur et de la joie, Vénus n'en comporte pas moins une face sombre de peurs et de renoncements qui expriment sa fragilité. En maîtrise dans le Serpent, celui-là même qui a séduit Ève dans la légende du paradis terrestre.</p>
+    </div>
+  </div>
+
+  <!-- Jupiter / Buffle -->
+  <div class="astre-card reveal" id="jupiter">
+    <div class="astre-picto">
+      <svg viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28,20 C28,20 42,20 46,28 C50,36 44,46 36,48" fill="none" stroke="#aaccff" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="22" y1="42" x2="58" y2="42" stroke="#aaccff" stroke-width="1.4"/>
+        <line x1="48" y1="28" x2="48" y2="62" stroke="#aaccff" stroke-width="1.4"/>
+      </svg>
+    </div>
+    <div class="astre-content">
+      <div class="astre-header">
+        <span class="astre-name">Jupiter</span>
+        <span class="astre-maitrise">Maître de Buffle</span>
+      </div>
+      <p class="astre-periode">Révolution : 11 ans · Signe : Avril</p>
+      <p class="astre-texte">Maturité, autorité, sérieux caractérisent Jupiter qui domine le Buffle et lui confère par ailleurs sa sensualité. Sa possessivité naturelle et sa forte ambition s'accompagnent de la tradition. Il y retrouve l'abondance des opportunités, porté par une foi sereine en son destin. Sa sagesse et sa générosité l'amènent quelquefois à un excès de confiance. C'est l'autorité et la maturité qui dominent chez Jupiter, compensées par sa sensualité naturelle.</p>
+    </div>
+  </div>
+
+  <!-- Uranus / Pentacle -->
+  <div class="astre-card reveal" id="uranus">
+    <div class="astre-picto">
+      <svg viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="50" r="14" fill="none" stroke="#aaccff" stroke-width="1.6"/>
+        <line x1="16" y1="50" x2="64" y2="50" stroke="#aaccff" stroke-width="1.4"/>
+        <line x1="40" y1="18" x2="40" y2="36" stroke="#aaccff" stroke-width="1.4"/>
+        <circle cx="40" cy="14" r="4" fill="#aaccff"/>
+        <line x1="22" y1="30" x2="32" y2="40" stroke="#aaccff" stroke-width="1.2"/>
+        <line x1="58" y1="30" x2="48" y2="40" stroke="#aaccff" stroke-width="1.2"/>
+      </svg>
+    </div>
+    <div class="astre-content">
+      <div class="astre-header">
+        <span class="astre-name">Uranus</span>
+        <span class="astre-maitrise">Maître de Pentacle</span>
+      </div>
+      <p class="astre-periode">Révolution : 83 ans · Signe : Mai</p>
+      <p class="astre-texte">Symbole de l'équilibre, de l'apport de l'expérience et de la transmission, mais aussi adepte de la solitude pouvant aller jusqu'au repli sur soi ou la contraction. Il est ainsi et aussi le maître du temps, de la durée, la lenteur et la réflexion. Il transmet de la sorte les traditions, les connaissances du passé, la mémoire et l'oubli.</p>
+    </div>
+  </div>
+
+  <!-- Neptune / Neptunus -->
+  <div class="astre-card reveal" id="neptune">
+    <div class="astre-picto">
+      <svg viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+        <line x1="40" y1="12" x2="40" y2="68" stroke="#aaccff" stroke-width="1.6"/>
+        <line x1="18" y1="44" x2="62" y2="44" stroke="#aaccff" stroke-width="1.4"/>
+        <path d="M18,32 Q18,16 40,16 Q62,16 62,32" fill="none" stroke="#aaccff" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="26" y1="58" x2="54" y2="58" stroke="#aaccff" stroke-width="1.1"/>
+      </svg>
+    </div>
+    <div class="astre-content">
+      <div class="astre-header">
+        <span class="astre-name">Neptune</span>
+        <span class="astre-maitrise">Maître de Neptunus</span>
+      </div>
+      <p class="astre-periode">Révolution : 163 ans · Signe : Juin</p>
+      <p class="astre-texte">Force de vie dominante, il apporte la volonté d'agir, l'étendue débordante du savoir. Neptune apporte aussi de l'inspiration, des rêves, de la poésie, aime la philosophie, la mouvance et la fluidité. Il est maître des eaux et des océans, des transmissions mentales et des flux vivants ou cachés, des secrets, des connexions avec l'au-delà, le passé et le futur.</p>
+    </div>
+  </div>
+
+  <!-- Astérydes / Stella -->
+  <div class="astre-card reveal" id="asterydes">
+    <div class="astre-picto">
+      <svg viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="26" cy="26" r="7" fill="none" stroke="#aaccff" stroke-width="1.4"/>
+        <circle cx="54" cy="26" r="5" fill="none" stroke="#aaccff" stroke-width="1.2"/>
+        <circle cx="26" cy="54" r="5" fill="none" stroke="#aaccff" stroke-width="1.2"/>
+        <circle cx="54" cy="54" r="7" fill="none" stroke="#aaccff" stroke-width="1.4"/>
+        <circle cx="40" cy="40" r="4" fill="#aaccff"/>
+        <line x1="31" y1="31" x2="36" y2="36" stroke="#aaccff" stroke-width="1" opacity="0.6"/>
+        <line x1="49" y1="31" x2="44" y2="36" stroke="#aaccff" stroke-width="1" opacity="0.6"/>
+        <line x1="31" y1="49" x2="36" y2="44" stroke="#aaccff" stroke-width="1" opacity="0.6"/>
+        <line x1="49" y1="49" x2="44" y2="44" stroke="#aaccff" stroke-width="1" opacity="0.6"/>
+      </svg>
+    </div>
+    <div class="astre-content">
+      <div class="astre-header">
+        <span class="astre-name">Astérydes</span>
+        <span class="astre-maitrise">Maître de Stella</span>
+      </div>
+      <p class="astre-periode">Révolution : 7 ans · Signe : Juillet</p>
+      <p class="astre-texte">Astre ignoré des Chaldéens, il représente cette ceinture de corps libres fourmillant entre Mars et Jupiter. Champion de la multiplicité, des échanges, de la tolérance, de l'ouverture d'esprit. Il apporte de l'excentricité, de l'irrationnel, voire de la folie. C'est l'Astre du futur, de la science-fiction, maître des sauts brusques et mouvements incessants, de la danse.</p>
+    </div>
+  </div>
+
+  <!-- Lune / Lynx -->
+  <div class="astre-card reveal" id="lune">
+    <div class="astre-picto">
+      <svg viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50,16 A26,26 0 1 0 50,64 A20,20 0 1 1 50,16 Z" fill="#aaccff" opacity="0.9"/>
+      </svg>
+    </div>
+    <div class="astre-content">
+      <div class="astre-header">
+        <span class="astre-name">Lune</span>
+        <span class="astre-maitrise">Maître de Lynx</span>
+      </div>
+      <p class="astre-periode">Révolution : 29 jours · Signe : Août</p>
+      <p class="astre-texte">L'âme du subconscient, des choses cachées, mais aussi de l'intelligence et de la raison. La Lune fait rêver, astre de la nuit qui disparaît derrière la lumière du jour où son pouvoir d'occulter le Soleil apporte au Lynx la dissimulation et le goût du secret. Et la connaissance de l'inconnu et du vénéré.</p>
+    </div>
+  </div>
+
+  <!-- Terra / Caprus -->
+  <div class="astre-card reveal" id="terra">
+    <div class="astre-picto">
+      <svg viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="40" r="22" fill="none" stroke="#aaccff" stroke-width="1.6"/>
+        <line x1="18" y1="40" x2="62" y2="40" stroke="#aaccff" stroke-width="1.4"/>
+        <line x1="40" y1="18" x2="40" y2="62" stroke="#aaccff" stroke-width="1.4"/>
+      </svg>
+    </div>
+    <div class="astre-content">
+      <div class="astre-header">
+        <span class="astre-name">Terra</span>
+        <span class="astre-maitrise">Maître de Caprus · Axandans</span>
+      </div>
+      <p class="astre-periode">Révolution : 24 heures · Signe : Septembre</p>
+      <p class="astre-texte">Astre concret, du terre à terre, du bon sens, et aussi du monde qui est sous nos pieds — même au-dessous des volcans. Il apporte l'harmonie et la paix, parfois un peu d'indécision et de versatilité en balance avec une fermeté dont il sait jouer quelquefois brutalement. Ses colères sont ponctuelles mais quelquefois terribles et dévastatrices.</p>
+    </div>
+  </div>
+
+  <!-- Soleil / Coq -->
+  <div class="astre-card reveal" id="soleil">
+    <div class="astre-picto">
+      <svg viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="40" r="14" fill="none" stroke="#d4a840" stroke-width="1.8"/>
+        <circle cx="40" cy="40" r="4" fill="#d4a840"/>
+        <line x1="40" y1="16" x2="40" y2="22" stroke="#d4a840" stroke-width="1.6"/>
+        <line x1="40" y1="58" x2="40" y2="64" stroke="#d4a840" stroke-width="1.6"/>
+        <line x1="16" y1="40" x2="22" y2="40" stroke="#d4a840" stroke-width="1.6"/>
+        <line x1="58" y1="40" x2="64" y2="40" stroke="#d4a840" stroke-width="1.6"/>
+        <line x1="23" y1="23" x2="27" y2="27" stroke="#d4a840" stroke-width="1.4"/>
+        <line x1="53" y1="53" x2="57" y2="57" stroke="#d4a840" stroke-width="1.4"/>
+        <line x1="57" y1="23" x2="53" y2="27" stroke="#d4a840" stroke-width="1.4"/>
+        <line x1="27" y1="53" x2="23" y2="57" stroke="#d4a840" stroke-width="1.4"/>
+      </svg>
+    </div>
+    <div class="astre-content">
+      <div class="astre-header">
+        <span class="astre-name">Soleil</span>
+        <span class="astre-maitrise">Maître de Coq</span>
+      </div>
+      <p class="astre-periode">Révolution : 1 an · Signe : Octobre</p>
+      <p class="astre-texte">Le rayonnement, l'affirmation de soi, la force de vie — jusqu'à l'amener quelquefois à la présomption, la domination, l'exubérance. Puissant et généreux, c'est le symbole de la fertilité, de la vie qu'il nourrit, du rayonnement qu'il partage avec générosité, sans compter. Le Soleil en Coq valide le Signe et l'identifie comme tel plus puissamment.</p>
+    </div>
+  </div>
+
+  <!-- Mercure / Equus -->
+  <div class="astre-card reveal" id="mercure">
+    <div class="astre-picto">
+      <svg viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24,26 Q24,10 40,10 Q56,10 56,26" fill="none" stroke="#aaccff" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="40" cy="36" r="14" fill="none" stroke="#aaccff" stroke-width="1.6"/>
+        <line x1="40" y1="50" x2="40" y2="66" stroke="#aaccff" stroke-width="1.4"/>
+        <line x1="28" y1="59" x2="52" y2="59" stroke="#aaccff" stroke-width="1.4"/>
+        <line x1="32" y1="66" x2="48" y2="66" stroke="#aaccff" stroke-width="1.1"/>
+      </svg>
+    </div>
+    <div class="astre-content">
+      <div class="astre-header">
+        <span class="astre-name">Mercure</span>
+        <span class="astre-maitrise">Maître de Equus</span>
+      </div>
+      <p class="astre-periode">Révolution : 89 jours · Signe : Novembre</p>
+      <p class="astre-texte">Mercure est l'astre du désir, maître d'Equus. C'est l'originalité, l'indépendance, le changement qui le guident dans les chemins de l'art, du progrès et des combats, où il révèle quelquefois sa violence cachée. Sa faculté de communiquer lui permet de partager des valeurs qu'il transmet par un mouvement incessant.</p>
+    </div>
+  </div>
+
+  <!-- Mars / Aigle -->
+  <div class="astre-card reveal" id="mars">
+    <div class="astre-picto">
+      <svg viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="36" cy="44" r="20" fill="none" stroke="#aaccff" stroke-width="1.6"/>
+        <line x1="50" y1="30" x2="68" y2="12" stroke="#aaccff" stroke-width="1.6"/>
+        <line x1="54" y1="12" x2="68" y2="12" stroke="#aaccff" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="68" y1="12" x2="68" y2="26" stroke="#aaccff" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="36" cy="44" r="4" fill="#aaccff"/>
+      </svg>
+    </div>
+    <div class="astre-content">
+      <div class="astre-header">
+        <span class="astre-name">Mars</span>
+        <span class="astre-maitrise">Maître de Aigle</span>
+      </div>
+      <p class="astre-periode">Révolution : 691 jours · Signe : Décembre</p>
+      <p class="astre-texte">Le pouvoir, l'agressivité, la domination, l'énergie. Avec lui vient la lutte, la pugnacité, la rébellion, la force. Mars c'est le désir d'agir, de vaincre, de se mesurer à autrui quel qu'il soit. Il attaque, il défie, il se montre, il décide, il commande et il est sûr de vaincre — ce qui l'amène quelquefois à mal se protéger.</p>
+    </div>
+  </div>
+
+  <!-- Alpha -->
+  <div class="astre-card reveal" id="alpha">
+    <div class="astre-picto">
+      <svg viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+        <text x="40" y="52" text-anchor="middle" font-family="serif" font-size="42" fill="#d4a840" opacity="0.9">α</text>
+      </svg>
+    </div>
+    <div class="astre-content">
+      <div class="astre-header">
+        <span class="astre-name">Alpha</span>
+        <span class="astre-maitrise">Signe de l'Année</span>
+      </div>
+      <p class="astre-periode">Révolution : 12 ans · Parcourt le Nodiaque en 12 ans</p>
+      <p class="astre-texte">L'Alpha est l'astre propre à la Noastrologie qui caractérise l'année. À la manière de l'astrologie chinoise — mais selon un cycle de 12 ans —, il indique sous quel signe du Nodiaque se place l'année de naissance. L'Alpha complète le Signe Noastral en apportant une coloration supplémentaire à la lecture du Schème. En 2026, l'Alpha est en <strong style="color:var(--gold-light);">Quadran</strong>.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>
+    <a href="index.html">Accueil</a> ·
+    <a href="signes.html">Les Signes</a> ·
+    <a href="astres.html">Les Astres</a> ·
+    <a href="noastrologie.html">Noastrologie</a>
+  </p>
+  <p style="margin-top:8px;font-size:.62rem;font-family:'Lato',sans-serif;font-weight:300;letter-spacing:.04em;">
+    © 2014–2026 Jean-Michel Reboul (JMR) — Noastrologie / Nowastrology · Tous droits réservés
+  </p>
+</footer>
+
+</div>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
