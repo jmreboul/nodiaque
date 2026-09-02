@@ -1,10 +1,10 @@
 # Nodiaque
 
 Système cosmologique personnel — Calculateur de Schème Noastral pour le Nodiaque.
+Sans prétendre à des prévisions toujours hasardeuses en Astrologie, cette image d'un ciel inventé de toutes pièces permet de comprendre ce qui se passe lorsqu'on consulte un astrologue ou un site astrologique.
 
 ## Utilisation
-
-Il faut renseigner une date et une heure pour générer le Schème Noastral correspondant.
+Une date (année, jour, heure) suffisent pour générer le Schème Noastral correspondant.
 
 ## Accès
 
