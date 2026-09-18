@@ -10,6 +10,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 
+/* ── Navigation ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(4,4,20,0.90);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(100,140,255,0.25);
+  padding: 0 24px;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+.nav-logo {
+  font-family: 'Cinzel', serif; font-size: .95rem; font-weight: 700;
+  color: #d4a840; letter-spacing: .12em;
+  text-decoration: none; white-space: nowrap;
+}
+.nav-links { display: flex; gap: 4px; list-style: none; flex-wrap: wrap; }
+.nav-links a {
+  font-family: 'Cinzel', serif; font-size: .68rem; font-weight: 600;
+  color: #aaccff; text-decoration: none;
+  padding: 5px 9px; border-radius: 5px; letter-spacing: .07em;
+  transition: background .2s, color .2s; white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.active { background: rgba(15,15,100,0.88); color: white; }
+.nav-links a.cta { background: #8b1a1a; color: white; margin-left: 6px; font-weight: 700; }
+.nav-links a.cta:hover { background: #a02020; }
+
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -272,8 +299,6 @@
 </footer>
 
 <script>
-"use strict";
-
 "use strict";
 const NS = 'http://www.w3.org/2000/svg';
 
@@ -785,7 +810,7 @@ function compute(){
   // Légende
   const sunAngle=results.find(r=>r.name==='Soleil').angle;
   const sunSec=SECTORS[sectorOf(sunAngle)];
-  const alphaJan=bodyAngle(BODIES.find(b=>b.name==='Alpha'), daysSince1901(1,1,y,0,0));
+  const alphaJan=bodyAngle(BODIES.find(b=>b.name==='Alpha'), daysSince1901(1,7,y,0,0));
   const alphaSec=SECTORS[sectorOf(alphaJan)];
 
   // Résumé complet des positions
@@ -864,7 +889,7 @@ function buildReading() {
   const sunAngle   = bodyAngle(BODIES.find(b=>b.name==='Soleil'), days);
   const sunSector  = SECTORS[sectorOf(sunAngle)];
   const sunDeg     = Math.round(sunAngle % 30);
-  const alphaAngle = bodyAngle(BODIES.find(b=>b.name==='Alpha'), daysSince1901(1,1,y,0,0));
+  const alphaAngle = bodyAngle(BODIES.find(b=>b.name==='Alpha'), daysSince1901(1,7,y,0,0));
   const alphaSec   = SECTORS[sectorOf(alphaAngle)];
   const terraAngle = bodyAngle(BODIES.find(b=>b.name==='Axandans'), days);
   const terraSec   = SECTORS[sectorOf(terraAngle)];
@@ -875,7 +900,7 @@ function buildReading() {
   // Show section
   const sec = document.getElementById('lectureSection');
   sec.style.display = 'block';
-  document.getElementById('lectureHeading').textContent = '✦ Lecture de votre Schème · ' + sunSector;
+  document.getElementById('lectureHeading').textContent = "✦ Lecture de votre Schème · " + sunSector;
   document.getElementById('sp-nom').textContent   = sunSector;
   document.getElementById('sp-meta').textContent  = signData.mois + ' · ' + signData.genre + ' · Fondamental du ' + fond + ' · Soleil à ' + sunDeg + '°';
   document.getElementById('sp-texte').textContent = signData.texte;
@@ -887,9 +912,9 @@ function buildReading() {
 
   const alphaData = SIGN_DATA[sectorOf(alphaAngle)];
   document.getElementById('lc-alpha').textContent    = alphaSec;
-  document.getElementById('lc-alpha-t').textContent  = 'Signe de l'année '+y+'. '+alphaData.defluence+' — '+alphaData.element+'.';
+  document.getElementById('lc-alpha-t').textContent  = "Signe de l'année "+y+". "+alphaData.defluence+" — "+alphaData.element+".";
   document.getElementById('lc-axandans').textContent  = terraSec;
-  document.getElementById('lc-axandans-t').textContent = 'Terra à '+String(h).padStart(2,'0')+'h'+String(mn).padStart(2,'0')+'. Teinte : '+SIGN_DATA[sectorOf(terraAngle)].defluence.toLowerCase()+'.';
+  document.getElementById("lc-axandans-t").textContent = "Terra à "+String(h).padStart(2,"0")+"h"+String(mn).padStart(2,"0")+". Teinte : "+SIGN_DATA[sectorOf(terraAngle)].defluence.toLowerCase()+".";
   document.getElementById('lc-fond').textContent   = fond;
   document.getElementById('lc-fond-t').textContent  = FOND_TEXTES[fond];
   document.getElementById('lc-defl').textContent   = defl;
