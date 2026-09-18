@@ -3,181 +3,166 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Votre Schème Noastral personnel — Noastrologie">
 <title>Votre Schème — Noastrologie</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#1a1a5a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-:root{
-  --gold:#d4a840;--gold-light:#f0c860;--red-dark:#8b1a1a;
-  --text-main:#ddeeff;--text-muted:#8899bb;--text-accent:#aaccff;
-  --border:rgba(100,140,255,0.25);--pill-bg:rgba(15,15,100,0.88);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{font-family:'Lato',sans-serif;background:#04040f;color:var(--text-main);min-height:100vh;overflow-x:hidden;}
-.cosmos-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse at 30% 25%,rgba(58,32,160,.35) 0%,transparent 55%),
-             radial-gradient(ellipse at 70% 75%,rgba(32,8,128,.30) 0%,transparent 55%),
-             radial-gradient(ellipse at 50% 50%,#1a1a5a 0%,#0d0d3a 40%,#04040f 100%);}
-.stars{position:fixed;inset:0;z-index:0;pointer-events:none;}
-.stars::before{content:'';position:absolute;inset:0;
-  background-image:
-    radial-gradient(1.5px 1.5px at 12% 18%,white 0%,transparent 100%),
-    radial-gradient(1.2px 1.2px at 28% 42%,rgba(200,210,255,.9) 0%,transparent 100%),
-    radial-gradient(1.8px 1.8px at 45%  8%,white 0%,transparent 100%),
-    radial-gradient(1.0px 1.0px at 62% 31%,rgba(255,220,220,.8) 0%,transparent 100%),
-    radial-gradient(1.4px 1.4px at 78% 55%,white 0%,transparent 100%),
-    radial-gradient(0.9px 0.9px at 88% 12%,rgba(200,210,255,.9) 0%,transparent 100%),
-    radial-gradient(1.6px 1.6px at  5% 72%,white 0%,transparent 100%),
-    radial-gradient(1.1px 1.1px at 35% 88%,rgba(255,210,210,.8) 0%,transparent 100%);}
-.content{position:relative;z-index:1;}
 
-/* Nav */
-nav{position:sticky;top:0;z-index:100;background:rgba(4,4,20,.90);backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;
-  justify-content:space-between;height:56px;}
-.nav-logo{font-family:'Cinzel',serif;font-size:.95rem;font-weight:700;color:var(--gold);
-  letter-spacing:.12em;text-decoration:none;white-space:nowrap;}
-.nav-links{display:flex;gap:4px;list-style:none;flex-wrap:wrap;}
-.nav-links a{font-family:'Cinzel',serif;font-size:.68rem;font-weight:600;color:var(--text-accent);
-  text-decoration:none;padding:5px 9px;border-radius:5px;letter-spacing:.07em;
-  transition:background .2s,color .2s;white-space:nowrap;}
-.nav-links a:hover,.nav-links a.active{background:var(--pill-bg);color:white;}
-.nav-links a.cta{background:var(--red-dark);color:white;margin-left:6px;font-weight:700;}
-.nav-links a.cta:hover{background:#a02020;}
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #04040f;
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px 10px;
+    color: #dde;
+  }
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.3em;
+    color: #aabbcc;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    background: rgba(10,10,50,0.85);
+    border: 1px solid rgba(80,100,200,0.4);
+    border-radius: 8px;
+    padding: 10px 16px;
+    box-shadow: 0 2px 12px rgba(0,0,80,0.5);
+  }
+  .controls label { font-size: .8rem; color: #8899aa; }
+  .controls input[type=number] {
+    width: 62px; padding: 5px 6px; border: 1px solid #ccc;
+    border-radius: 4px; font-size: .88rem; text-align: center;
+    background: #fafafa;
+  }
+  .controls input[type=number]:focus { outline: none; border-color: #888; }
+  .sep { color: #bbb; }
+  button {
+    padding: 6px 20px; background: #2a2a2a; color: #fff;
+    border: none; border-radius: 5px; font-family: 'Cinzel', serif;
+    font-size: .78rem; letter-spacing: .12em; cursor: pointer;
+    transition: background .18s; margin-left: 6px;
+  }
+  button:hover { background: #555; }
+  .chart-wrap { width: min(860px, 97vw); height: min(860px, 97vw); }
+  #chart { width: 100%; height: 100%; overflow: visible; }
+  .legend {
+    margin-top: 14px;
+    background: rgba(8,8,50,0.82);
+    border: 1px solid rgba(80,110,220,0.35);
+    border-radius: 10px;
+    padding: 12px 20px;
+    box-shadow: 0 2px 12px rgba(0,0,80,0.4);
+    font-family: 'Cinzel', serif;
+    font-size: .78rem;
+    letter-spacing: .03em;
+    line-height: 1.9;
+    max-width: min(860px, 97vw);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .legend .signe     { font-size: .95rem; font-weight: 700; color: #ff8888; display: block; margin-bottom: 4px; }
+  .legend .planets   { color: #ccd; display: block; }
+  .legend .alphayear { color: #aabbcc; font-style: italic; display: block; margin-top: 4px; }
+  .date-cartouche {
+    display: inline-block;
+    margin: 10px auto 0;
+    padding: 6px 18px;
+    background: rgba(10,10,60,0.85);
+    border: 1px solid rgba(80,110,220,0.4);
+    border-radius: 20px;
+    font-family: 'Cinzel', serif;
+    font-size: .92rem;
+    font-weight: 600;
+    color: #aaccff;
+    letter-spacing: .06em;
+    box-shadow: 0 1px 4px rgba(0,0,0,.07);
+    text-align: center;
+  }
 
-/* Header */
-.page-header{text-align:center;padding:56px 24px 36px;}
-.eyebrow{font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;
-  letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
-.page-header h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,5vw,3rem);
-  font-weight:600;color:white;letter-spacing:.06em;margin-bottom:8px;}
-.page-header p{font-size:.9rem;color:var(--text-muted);max-width:560px;margin:0 auto;
-  line-height:1.75;font-weight:300;font-style:italic;}
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,30,0.85);backdrop-filter:blur(4px);z-index:1000;align-items:center;justify-content:center;}
+  .modal-overlay.open{display:flex;}
+  .modal-box{background:linear-gradient(135deg,#0a0a30 0%,#181860 100%);border:1px solid rgba(100,140,255,0.4);border-radius:14px;padding:22px 26px;max-width:min(500px,92vw);width:100%;color:#dde;box-shadow:0 8px 40px rgba(0,0,80,0.8);position:relative;font-family:'Lato',sans-serif;}
+  .modal-close{position:absolute;top:10px;right:14px;font-size:1.4rem;color:#aabbdd;cursor:pointer;background:none;border:none;}
+  .modal-close:hover{color:white;}
+  .modal-title{font-family:'Cinzel',serif;font-size:1.15rem;font-weight:700;color:#ff9999;margin-bottom:3px;}
+  .modal-month{font-size:.78rem;color:#99aacc;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
+  .modal-defluence{font-size:.85rem;color:#ffcc88;margin-bottom:10px;font-style:italic;}
+  .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px 14px;margin-bottom:12px;font-size:.8rem;}
+  .modal-grid span{color:#aabbdd;}.modal-grid strong{color:#ddeeff;}
+  .modal-texte{font-size:.8rem;color:#ccd;line-height:1.65;border-top:1px solid rgba(100,140,255,0.2);padding-top:10px;margin-bottom:10px;}
+  .modal-affinites{font-size:.76rem;color:#99bbdd;}
 
-/* Calculator */
-.calc-section{max-width:900px;margin:0 auto;padding:0 24px 32px;}
-.calc-box{background:rgba(8,8,40,.80);border:1px solid var(--border);
-  border-radius:14px;padding:28px 24px;}
-.calc-title{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:white;
-  letter-spacing:.1em;margin-bottom:16px;text-align:center;}
-.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;
-  justify-content:center;margin-bottom:16px;}
-.controls label{font-family:'Cinzel',serif;font-size:.72rem;color:var(--text-muted);
-  letter-spacing:.06em;}
-.controls input[type=number]{width:62px;padding:6px 7px;
-  border:1px solid rgba(100,140,255,.35);border-radius:4px;font-size:.9rem;
-  text-align:center;background:rgba(10,10,50,.8);color:white;}
-.controls input[type=number]:focus{outline:none;border-color:rgba(140,180,255,.7);}
-.sep{color:var(--text-muted);}
-.btn-calc{padding:8px 24px;background:var(--red-dark);color:white;border:none;
-  border-radius:5px;font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.12em;
-  cursor:pointer;transition:background .18s;margin-left:8px;}
-.btn-calc:hover{background:#a02020;}
-.chart-wrap{width:min(800px,96%);height:min(800px,96vw);margin:0 auto;}
-#chart{width:100%;height:100%;overflow:visible;}
-@keyframes fadeInScale{from{opacity:0;transform:scale(.88) rotate(-6deg);}to{opacity:1;transform:scale(1) rotate(0deg);}}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-#chart.animating{animation:fadeInScale .7s cubic-bezier(.34,1.56,.64,1) forwards;}
-.legend.animating,.date-cartouche.animating{animation:fadeIn .8s ease forwards;}
-.date-cartouche{display:inline-block;margin:10px auto 0;padding:6px 18px;
-  background:rgba(10,10,60,.85);border:1px solid rgba(80,110,220,.4);border-radius:20px;
-  font-family:'Cinzel',serif;font-size:.88rem;font-weight:600;color:#aaccff;
-  letter-spacing:.06em;text-align:center;}
-.legend{margin-top:14px;background:rgba(8,8,50,.82);border:1px solid rgba(80,110,220,.35);
-  border-radius:10px;padding:12px 20px;font-family:'Cinzel',serif;font-size:.75rem;
-  letter-spacing:.03em;line-height:1.9;max-width:min(800px,96%);margin-inline:auto;}
-.legend .signe{font-size:.92rem;font-weight:700;color:#ff8888;display:block;margin-bottom:4px;}
-.legend .planets{color:#ccd;display:block;}
-.legend .alphayear{color:#99aacc;font-style:italic;display:block;margin-top:4px;}
+  @keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.85) rotate(-8deg); }
+    to   { opacity: 1; transform: scale(1)    rotate(0deg);  }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  #chart { animation: none; }
+  #chart.animating { animation: fadeInScale 0.7s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+  .legend.animating { animation: fadeIn 0.8s ease forwards; }
+  .date-cartouche.animating { animation: fadeIn 0.6s ease forwards; }
 
-/* Lecture personnalisée */
-.lecture{max-width:820px;margin:0 auto;padding:16px 24px 80px;}
-.lecture-title{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;
-  color:var(--gold);letter-spacing:.12em;text-align:center;margin-bottom:24px;
-  display:none;}
-
-/* Bloc signe principal */
-.signe-principal{background:rgba(139,26,26,.18);border:1px solid rgba(139,26,26,.4);
-  border-radius:14px;padding:24px 28px;margin-bottom:20px;display:none;}
-.signe-principal h2{font-family:'Cinzel',serif;font-size:clamp(1.2rem,3vw,1.7rem);
-  font-weight:700;color:white;letter-spacing:.05em;margin-bottom:4px;}
-.signe-principal .sp-meta{font-size:.78rem;color:var(--text-muted);font-style:italic;
-  letter-spacing:.08em;margin-bottom:14px;}
-.signe-principal p{font-size:.9rem;line-height:1.85;color:var(--text-main);
-  font-weight:300;margin-bottom:10px;}
-.sp-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
-.sp-pill{font-family:'Cinzel',serif;font-size:.7rem;font-weight:600;
-  padding:4px 12px;border-radius:14px;border:1px solid var(--border);
-  background:var(--pill-bg);color:white;letter-spacing:.05em;}
-.sp-pill.gold{border-color:rgba(212,168,64,.5);color:var(--gold-light);
-  background:rgba(80,50,0,.4);}
-
-/* Blocs secondaires */
-.lecture-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:16px;margin-bottom:20px;display:none;}
-.lecture-card{background:rgba(10,10,50,.7);border:1px solid var(--border);
-  border-radius:10px;padding:18px 20px;}
-.lc-label{font-family:'Cinzel',serif;font-size:.65rem;font-weight:700;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
-.lc-value{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;
-  color:white;margin-bottom:6px;}
-.lc-text{font-size:.84rem;line-height:1.7;color:var(--text-main);font-weight:300;}
-
-/* Planètes dans leur signe */
-.planetes-section{background:rgba(8,8,40,.7);border:1px solid var(--border);
-  border-radius:12px;padding:20px 24px;margin-bottom:20px;display:none;}
-.planetes-section h3{font-family:'Cinzel',serif;font-size:.88rem;font-weight:700;
-  color:var(--text-accent);letter-spacing:.08em;margin-bottom:14px;}
-.planetes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;}
-.planete-item{background:rgba(15,15,60,.6);border-radius:8px;padding:10px 12px;}
-.pi-astre{font-family:'Cinzel',serif;font-size:.72rem;font-weight:700;
-  color:var(--gold);margin-bottom:2px;}
-.pi-signe{font-size:.82rem;color:var(--text-main);}
-.pi-deg{font-size:.72rem;color:var(--text-muted);}
-
-/* Modal */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,30,.85);
-  backdrop-filter:blur(4px);z-index:1000;align-items:center;justify-content:center;}
-.modal-overlay.open{display:flex;}
-.modal-box{background:linear-gradient(135deg,#0a0a30,#181860);border:1px solid rgba(100,140,255,.4);
-  border-radius:14px;padding:22px 26px;max-width:min(500px,92vw);width:100%;color:#dde;
-  box-shadow:0 8px 40px rgba(0,0,80,.8);position:relative;font-family:'Lato',sans-serif;}
-.modal-close{position:absolute;top:10px;right:14px;font-size:1.4rem;color:#aabbdd;
-  cursor:pointer;background:none;border:none;}
-.modal-close:hover{color:white;}
-.modal-title{font-family:'Cinzel',serif;font-size:1.15rem;font-weight:700;color:#ff9999;margin-bottom:3px;}
-.modal-month{font-size:.78rem;color:#99aacc;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
-.modal-defluence{font-size:.85rem;color:#ffcc88;margin-bottom:10px;font-style:italic;}
-.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px 14px;margin-bottom:12px;font-size:.8rem;}
-.modal-grid span{color:#aabbdd;}.modal-grid strong{color:#ddeeff;}
-.modal-texte{font-size:.8rem;color:#ccd;line-height:1.65;border-top:1px solid rgba(100,140,255,.2);
-  padding-top:10px;margin-bottom:10px;}
-.modal-affinites{font-size:.76rem;color:#99bbdd;}
-
-/* Footer */
-footer{border-top:1px solid var(--border);text-align:center;padding:24px;
-  font-size:.7rem;color:var(--text-muted);font-family:'Cinzel',serif;letter-spacing:.07em;}
-footer a{color:var(--text-accent);text-decoration:none;}
-footer a:hover{color:white;}
-
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s;}
-.reveal.visible{opacity:1;transform:none;}
-
-@media(max-width:640px){
-  nav{padding:0 10px;}
-  .nav-links a{font-size:.58rem;padding:4px 5px;}
-  .nav-logo{font-size:.8rem;}
-}
+/* ── Lecture personnalisée ── */
+.lecture { max-width:820px; margin:0 auto; padding:16px 24px 80px; display:none; }
+.lecture-heading { font-family:'Cinzel',serif; font-size:1.1rem; font-weight:700;
+  color:var(--gold); letter-spacing:.12em; text-align:center; margin-bottom:24px; }
+.signe-box { background:rgba(139,26,26,.18); border:1px solid rgba(139,26,26,.4);
+  border-radius:14px; padding:24px 28px; margin-bottom:20px; }
+.signe-box h2 { font-family:'Cinzel',serif; font-size:clamp(1.2rem,3vw,1.7rem);
+  font-weight:700; color:white; letter-spacing:.05em; margin-bottom:4px; }
+.signe-box .meta { font-size:.78rem; color:var(--text-muted); font-style:italic;
+  letter-spacing:.08em; margin-bottom:12px; }
+.signe-box p { font-size:.9rem; line-height:1.85; color:var(--text-main); font-weight:300; margin-bottom:10px; }
+.sp-pills { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.sp-pill { font-family:'Cinzel',serif; font-size:.7rem; font-weight:600;
+  padding:4px 12px; border-radius:14px; border:1px solid var(--border);
+  background:var(--pill-bg); color:white; letter-spacing:.05em; }
+.sp-pill.gold { border-color:rgba(212,168,64,.5); color:var(--gold-light); background:rgba(80,50,0,.4); }
+.lec-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:14px; margin-bottom:20px; }
+.lec-card { background:rgba(10,10,50,.7); border:1px solid var(--border);
+  border-radius:10px; padding:16px 18px; }
+.lec-label { font-family:'Cinzel',serif; font-size:.65rem; font-weight:700;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:5px; }
+.lec-value { font-family:'Cinzel',serif; font-size:1rem; font-weight:700;
+  color:white; margin-bottom:5px; }
+.lec-text { font-size:.84rem; line-height:1.7; color:var(--text-main); font-weight:300; }
+.plan-section { background:rgba(8,8,40,.7); border:1px solid var(--border);
+  border-radius:12px; padding:18px 22px; margin-bottom:20px; }
+.plan-section h3 { font-family:'Cinzel',serif; font-size:.88rem; font-weight:700;
+  color:var(--text-accent); letter-spacing:.08em; margin-bottom:12px; }
+.plan-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:8px; }
+.plan-item { background:rgba(15,15,60,.6); border-radius:8px; padding:9px 12px; }
+.pi-astre { font-family:'Cinzel',serif; font-size:.72rem; font-weight:700; color:var(--gold); margin-bottom:2px; }
+.pi-signe { font-size:.82rem; color:var(--text-main); }
+.pi-deg { font-size:.7rem; color:var(--text-muted); }
+.teissier-link { text-align:center; margin-top:20px; padding:18px;
+  background:rgba(10,10,50,.5); border:1px solid var(--border); border-radius:10px; }
+.teissier-link p { font-size:.86rem; color:var(--text-muted); margin-bottom:10px; font-style:italic; }
+.teissier-link a { font-family:'Cinzel',serif; font-size:.76rem; font-weight:700;
+  color:white; text-decoration:none; padding:8px 20px; background:var(--pill-bg);
+  border:1px solid var(--border); border-radius:5px; letter-spacing:.08em; }
 </style>
 </head>
 <body>
-<div class="cosmos-bg"></div>
-<div class="stars"></div>
-<div class="content">
 
 <nav>
   <a href="index.html" class="nav-logo">✦ Noastrologie</a>
@@ -190,30 +175,38 @@ footer a:hover{color:white;}
   </ul>
 </nav>
 
-<div class="page-header">
-  <p class="eyebrow">Noastrologie · Personnel</p>
-  <h1>Votre Schème Noastral</h1>
-  <p>Entrez votre date et heure de naissance pour découvrir votre Schème personnel — votre Signe, votre Alpha, votre Axandans et la position des 13 Astres.</p>
+<div style="text-align:center;padding:50px 24px 30px;">
+  <p style="font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;
+     letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;">
+     Noastrologie · Personnel</p>
+  <h1 style="font-family:'Cinzel',serif;font-size:clamp(1.8rem,5vw,3rem);
+     font-weight:600;color:white;letter-spacing:.06em;margin-bottom:10px;">
+     Votre Schème Noastral</h1>
+  <p style="font-size:.9rem;color:var(--text-muted);max-width:540px;margin:0 auto;
+     line-height:1.75;font-weight:300;font-style:italic;">
+     Entrez votre date et heure de naissance pour découvrir votre Schème personnel.</p>
 </div>
 
-<!-- Calculateur -->
-<div class="calc-section">
-  <div class="calc-box reveal">
-    <p class="calc-title">✦ Tracé de votre Nodiaque</p>
+<div style="max-width:920px;margin:0 auto;padding:0 24px 20px;">
+  <div style="background:rgba(8,8,40,.80);border:1px solid var(--border);border-radius:14px;padding:28px 24px;">
+    <p style="font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:white;
+       letter-spacing:.1em;margin-bottom:16px;text-align:center;">✦ Tracé de votre Nodiaque</p>
     <div class="controls">
       <label>Jour</label>
       <input type="number" id="iDay"   min="1"    max="31"   value="1">
-      <span class="sep">/</span>
+      <span style="color:var(--text-muted);">/</span>
       <label>Mois</label>
       <input type="number" id="iMonth" min="1"    max="12"   value="1">
-      <span class="sep">/</span>
+      <span style="color:var(--text-muted);">/</span>
       <label>Année</label>
       <input type="number" id="iYear"  min="1901" max="2100" value="1980">
       <label style="margin-left:8px;">H</label>
       <input type="number" id="iHour"  min="0"    max="23"   value="12">
-      <span class="sep">:</span>
+      <span style="color:var(--text-muted);">:</span>
       <input type="number" id="iMin"   min="0"    max="59"   value="0">
-      <button class="btn-calc" onclick="computeScheme()">Calculer mon Schème</button>
+      <button onclick="runScheme()" style="padding:7px 22px;background:var(--red-dark);color:white;
+        border:none;border-radius:5px;font-family:'Cinzel',serif;font-size:.78rem;
+        letter-spacing:.12em;cursor:pointer;margin-left:8px;">Calculer mon Schème</button>
     </div>
     <div style="text-align:center">
       <div class="date-cartouche" id="dateCartouche">—</div>
@@ -225,59 +218,32 @@ footer a:hover{color:white;}
   </div>
 </div>
 
-<!-- Lecture personnalisée (apparaît après calcul) -->
+<!-- Lecture personnalisée -->
 <div class="lecture" id="lectureSection">
-  <h2 class="lecture-title" id="lectureTitle">✦ Lecture de votre Schème</h2>
-
-  <!-- Signe principal -->
-  <div class="signe-principal" id="signePrincipal">
+  <h2 class="lecture-heading" id="lectureHeading"></h2>
+  <div class="signe-box" id="signeBox">
     <h2 id="sp-nom"></h2>
-    <p class="sp-meta" id="sp-meta"></p>
+    <p class="meta" id="sp-meta"></p>
     <p id="sp-texte"></p>
     <div class="sp-pills" id="sp-pills"></div>
   </div>
-
-  <!-- Alpha + Axandans -->
-  <div class="lecture-grid" id="lectureGrid">
-    <div class="lecture-card">
-      <div class="lc-label">Alpha · Signe de l'année</div>
-      <div class="lc-value" id="lc-alpha"></div>
-      <div class="lc-text" id="lc-alpha-text"></div>
-    </div>
-    <div class="lecture-card">
-      <div class="lc-label">Axandans · Signe de l'heure</div>
-      <div class="lc-value" id="lc-axandans"></div>
-      <div class="lc-text" id="lc-axandans-text"></div>
-    </div>
-    <div class="lecture-card">
-      <div class="lc-label">Fondamental</div>
-      <div class="lc-value" id="lc-fondamental"></div>
-      <div class="lc-text" id="lc-fondamental-text"></div>
-    </div>
-    <div class="lecture-card">
-      <div class="lc-label">Défluence</div>
-      <div class="lc-value" id="lc-defluence"></div>
-      <div class="lc-text" id="lc-defluence-text"></div>
-    </div>
+  <div class="lec-grid">
+    <div class="lec-card"><div class="lec-label">Alpha · Signe de l'année</div>
+      <div class="lec-value" id="lc-alpha"></div><div class="lec-text" id="lc-alpha-t"></div></div>
+    <div class="lec-card"><div class="lec-label">Axandans · Signe de l'heure</div>
+      <div class="lec-value" id="lc-axandans"></div><div class="lec-text" id="lc-axandans-t"></div></div>
+    <div class="lec-card"><div class="lec-label">Fondamental</div>
+      <div class="lec-value" id="lc-fond"></div><div class="lec-text" id="lc-fond-t"></div></div>
+    <div class="lec-card"><div class="lec-label">Défluence</div>
+      <div class="lec-value" id="lc-defl"></div><div class="lec-text" id="lc-defl-t"></div></div>
   </div>
-
-  <!-- Planètes dans leurs signes -->
-  <div class="planetes-section" id="planeteSection">
+  <div class="plan-section">
     <h3>Position des Astres dans votre Schème</h3>
-    <div class="planetes-grid" id="planeteGrid"></div>
+    <div class="plan-grid" id="planGrid"></div>
   </div>
-
-  <!-- Lien vers l'exemple Teissier -->
-  <div style="text-align:center;margin-top:24px;padding:20px;
-       background:rgba(10,10,50,.5);border:1px solid var(--border);border-radius:10px;">
-    <p style="font-size:.86rem;color:var(--text-muted);margin-bottom:12px;font-style:italic;">
-      Pour comprendre comment lire votre Schème, consultez notre exemple d'interprétation détaillée
-    </p>
-    <a href="teissier.html" style="font-family:'Cinzel',serif;font-size:.76rem;font-weight:700;
-       color:white;text-decoration:none;padding:8px 20px;background:var(--pill-bg);
-       border:1px solid var(--border);border-radius:5px;letter-spacing:.08em;">
-      Voir l'exemple Teissier →
-    </a>
+  <div class="teissier-link">
+    <p>Pour comprendre comment lire votre Schème, consultez notre exemple d'interprétation</p>
+    <a href="teissier.html">Voir l'exemple Teissier →</a>
   </div>
 </div>
 
@@ -294,20 +260,16 @@ footer a:hover{color:white;}
   </div>
 </div>
 
-<footer>
-  <p>
-    <a href="index.html">Accueil</a> ·
-    <a href="signes.html">Les Signes</a> ·
-    <a href="astres.html">Les Astres</a> ·
-    <a href="noastrologie.html">Noastrologie</a> ·
-    <a href="teissier.html">Exemple Teissier</a>
-  </p>
+<footer style="border-top:1px solid var(--border);text-align:center;padding:24px;
+  font-size:.7rem;color:var(--text-muted);font-family:'Cinzel',serif;letter-spacing:.07em;">
+  <p><a href="index.html" style="color:var(--text-accent);text-decoration:none;">Accueil</a> ·
+     <a href="signes.html" style="color:var(--text-accent);text-decoration:none;">Les Signes</a> ·
+     <a href="astres.html" style="color:var(--text-accent);text-decoration:none;">Les Astres</a> ·
+     <a href="noastrologie.html" style="color:var(--text-accent);text-decoration:none;">Noastrologie</a> ·
+     <a href="teissier.html" style="color:var(--text-accent);text-decoration:none;">Exemple Teissier</a></p>
   <p style="margin-top:8px;font-size:.62rem;font-family:'Lato',sans-serif;font-weight:300;letter-spacing:.04em;">
-    © 2014–2026 Jean-Michel Reboul (JMR) — Noastrologie / Nowastrology · Tous droits réservés
-  </p>
+    © 2014–2026 Jean-Michel Reboul (JMR) — Noastrologie / Nowastrology · Tous droits réservés</p>
 </footer>
-
-</div>
 
 <script>
 "use strict";
@@ -853,7 +815,6 @@ function compute(){
 compute();
 
 
-// ── Lecture personnalisée ──────────────────────────────────────
 const FONDAMENTAUX = {
   '1 Licorne':'Penser','2 Quadran':'Être','3 Serpent':'Agir',
   '4 Buffle':'Réaliser','5 Pentacle':'Penser','6 Neptunus':'Être',
@@ -861,149 +822,97 @@ const FONDAMENTAUX = {
   '10 Coq':'Être','11 Equus':'Agir','12 Aigle':'Réaliser'
 };
 const DEFLUENCES = {
-  '1 Licorne':'Le Défi','2 Quadran':'L'Immobilisme','3 Serpent':'La Séduction',
+  '1 Licorne':'Le Défi','2 Quadran':"L'Immobilisme",'3 Serpent':'La Séduction',
   '4 Buffle':'La Persévérance','5 Pentacle':'La Stabilité','6 Neptunus':'La Fécondité',
-  '7 Stella':'La Mobilité','8 Lynx':'L'Acuité','9 Caprus':'L'Équité',
+  '7 Stella':'La Mobilité','8 Lynx':"L'Acuité",'9 Caprus':"L'Équité",
   '10 Coq':'La Naissance','11 Equus':'La Violence','12 Aigle':'Le Pouvoir'
 };
-const FONDAMENTAL_TEXTES = {
-  'Penser':'Observer, analyser, conceptualiser. Avant d'agir, réfléchir et comprendre.',
-  'Être':'Se préoccuper de son existence, de sa place dans le monde. Attentif à ce que la vie offre.',
+const FOND_TEXTES = {
+  'Penser':"Observer, analyser, conceptualiser. Avant d'agir, réfléchir et comprendre.",
+  'Être':"Se préoccuper de son existence, de sa place dans le monde.",
   'Agir':'Se mettre en mouvement. Faire, créer, séduire, communiquer.',
   'Réaliser':'Construire, concrétiser, persévérer. Garder un but en ligne de mire.'
 };
-const DEFLUENCE_TEXTES = {
-  'Le Défi':'Attirée par ce qui résiste, ce qui semble improbable. Moteur intérieur vers l'exploration et la nouveauté.',
-  'L'Immobilisme':'Tendance à préserver les acquis, la stabilité, les traditions. Force d'ancrage.',
+const DEFL_TEXTES = {
+  'Le Défi':"Attirée par ce qui résiste, ce qui semble improbable. Moteur intérieur vers l'exploration.",
+  "L'Immobilisme":'Tendance à préserver les acquis, la stabilité, les traditions.',
   'La Séduction':'Intelligence sociale, aisance relationnelle, pouvoir du lien et de la parole.',
   'La Persévérance':'Endurance, fiabilité, sens des responsabilités. La force tranquille.',
-  'La Stabilité':'Discernement, constance, fiabilité intellectuelle. Recherche de la justesse.',
+  'La Stabilité':'Discernement, constance, fiabilité intellectuelle.',
   'La Fécondité':'Besoin profond de faire naître, de transmettre, de laisser une trace vivante.',
   'La Mobilité':'Adaptabilité, curiosité, ouverture. Signe du mouvement permanent.',
-  'L'Acuité':'Perspicacité, intelligence critique, discernement. Voir ce qui est caché.',
-  'L'Équité':'Sens de la justice, diplomatie, responsabilité collective. La voie médiane.',
-  'La Naissance':'Affirmation de soi, créativité, vitalité. Tout ce qui commence et rayonne.',
-  'La Violence':'Courage, énergie, engagement total. L'intensité comme moteur.',
+  "L'Acuité":'Perspicacité, intelligence critique, discernement. Voir ce qui est caché.',
+  "L'Équité":'Sens de la justice, diplomatie, responsabilité collective.',
+  'La Naissance':'Affirmation de soi, créativité, vitalité. Tout ce qui commence.',
+  'La Violence':'Courage, énergie, engagement total. Intensité comme moteur.',
   'Le Pouvoir':'Autorité, vision, responsabilité. Besoin de maîtrise et de hauteur.'
 };
 
-function computeScheme() {
+function runScheme() {
   compute();
-  setTimeout(buildReading, 100);
+  setTimeout(buildReading, 200);
 }
 
 function buildReading() {
-  const d = +document.getElementById('iDay').value;
-  const m = +document.getElementById('iMonth').value;
-  const y = +document.getElementById('iYear').value;
-  const h = +document.getElementById('iHour').value;
+  const d  = +document.getElementById('iDay').value;
+  const m  = +document.getElementById('iMonth').value;
+  const y  = +document.getElementById('iYear').value;
+  const h  = +document.getElementById('iHour').value;
   const mn = +document.getElementById('iMin').value;
+  const days = daysSince1901(d,m,y,h,mn);
 
-  const days = daysSince1901(d, m, y, h, mn);
-
-  // Sun sign
-  const sunAngle = bodyAngle(BODIES.find(b=>b.name==='Soleil'), days);
-  const sunSector = SECTORS[sectorOf(sunAngle)];
-  const sunDeg = Math.round(sunAngle % 30);
-
-  // Alpha
-  const alphaJan = bodyAngle(BODIES.find(b=>b.name==='Alpha'), daysSince1901(1,1,y,0,0));
-  const alphaSector = SECTORS[sectorOf(alphaJan)];
-
-  // Axandans (Terra)
+  const sunAngle   = bodyAngle(BODIES.find(b=>b.name==='Soleil'), days);
+  const sunSector  = SECTORS[sectorOf(sunAngle)];
+  const sunDeg     = Math.round(sunAngle % 30);
+  const alphaAngle = bodyAngle(BODIES.find(b=>b.name==='Alpha'), daysSince1901(1,1,y,0,0));
+  const alphaSec   = SECTORS[sectorOf(alphaAngle)];
   const terraAngle = bodyAngle(BODIES.find(b=>b.name==='Axandans'), days);
-  const terraSector = SECTORS[sectorOf(terraAngle)];
-  const hStr = String(h).padStart(2,'0');
-  const mnStr = String(mn).padStart(2,'0');
+  const terraSec   = SECTORS[sectorOf(terraAngle)];
+  const signData   = SIGN_DATA[sectorOf(sunAngle)];
+  const fond       = FONDAMENTAUX[sunSector];
+  const defl       = DEFLUENCES[sunSector];
 
-  // Sign data
-  const signData = SIGN_DATA[sectorOf(sunAngle)];
-
-  // Show lecture section
-  document.getElementById('lectureSection').style.display = 'block';
-  document.getElementById('lectureTitle').style.display = 'block';
-  document.getElementById('lectureTitle').textContent = '✦ Lecture de votre Schème · ' + sunSector;
-  document.getElementById('signePrincipal').style.display = 'block';
-  document.getElementById('lectureGrid').style.display = 'grid';
-  document.getElementById('planeteSection').style.display = 'block';
-
-  // Signe principal
-  document.getElementById('sp-nom').textContent = sunSector;
-  document.getElementById('sp-meta').textContent =
-    signData.mois + ' · ' + signData.genre + ' · Fondamental du ' + signData.fondamental +
-    ' · Soleil à ' + sunDeg + '°';
+  // Show section
+  const sec = document.getElementById('lectureSection');
+  sec.style.display = 'block';
+  document.getElementById('lectureHeading').textContent = '✦ Lecture de votre Schème · ' + sunSector;
+  document.getElementById('sp-nom').textContent   = sunSector;
+  document.getElementById('sp-meta').textContent  = signData.mois + ' · ' + signData.genre + ' · Fondamental du ' + fond + ' · Soleil à ' + sunDeg + '°';
   document.getElementById('sp-texte').textContent = signData.texte;
+  document.getElementById('sp-pills').innerHTML   =
+    '<span class="sp-pill gold">Défluence : '+signData.defluence+'</span>'+
+    '<span class="sp-pill">Élément : '+signData.element+'</span>'+
+    '<span class="sp-pill">Astre : '+signData.astre+'</span>'+
+    '<span class="sp-pill">Minéral : '+signData.mineral+'</span>';
 
-  // Pills
-  const pillsHTML =
-    '<span class="sp-pill gold">Défluence : ' + signData.defluence + '</span>' +
-    '<span class="sp-pill">Élément : ' + signData.element + '</span>' +
-    '<span class="sp-pill">Astre : ' + signData.astre + '</span>' +
-    '<span class="sp-pill">Minéral : ' + signData.mineral + '</span>' +
-    '<span class="sp-pill">Couleur : ' + signData.couleur + '</span>';
-  document.getElementById('sp-pills').innerHTML = pillsHTML;
-
-  // Alpha
-  const alphaData = SIGN_DATA[sectorOf(alphaJan)];
-  document.getElementById('lc-alpha').textContent = alphaSector;
-  document.getElementById('lc-alpha-text').textContent =
-    'Signe de l'année ' + y + '. ' + alphaData.defluence + ' — ' + alphaData.element + '.';
-
-  // Axandans
-  const axandansData = SIGN_DATA[sectorOf(terraAngle)];
-  document.getElementById('lc-axandans').textContent = terraSector;
-  document.getElementById('lc-axandans-text').textContent =
-    'Position de Terra à ' + hStr + 'h' + mnStr + '. ' +
-    'Teinte votre personnalité de : ' + axandansData.defluence.toLowerCase() + '.';
-
-  // Fondamental
-  const fond = FONDAMENTAUX[sunSector];
-  document.getElementById('lc-fondamental').textContent = fond;
-  document.getElementById('lc-fondamental-text').textContent = FONDAMENTAL_TEXTES[fond];
-
-  // Défluence
-  const defl = DEFLUENCES[sunSector];
-  document.getElementById('lc-defluence').textContent = defl;
-  document.getElementById('lc-defluence-text').textContent = DEFLUENCE_TEXTES[defl];
+  const alphaData = SIGN_DATA[sectorOf(alphaAngle)];
+  document.getElementById('lc-alpha').textContent    = alphaSec;
+  document.getElementById('lc-alpha-t').textContent  = 'Signe de l'année '+y+'. '+alphaData.defluence+' — '+alphaData.element+'.';
+  document.getElementById('lc-axandans').textContent  = terraSec;
+  document.getElementById('lc-axandans-t').textContent = 'Terra à '+String(h).padStart(2,'0')+'h'+String(mn).padStart(2,'0')+'. Teinte : '+SIGN_DATA[sectorOf(terraAngle)].defluence.toLowerCase()+'.';
+  document.getElementById('lc-fond').textContent   = fond;
+  document.getElementById('lc-fond-t').textContent  = FOND_TEXTES[fond];
+  document.getElementById('lc-defl').textContent   = defl;
+  document.getElementById('lc-defl-t').textContent  = DEFL_TEXTES[defl];
 
   // Planètes
-  const planetNames = [
-    {name:'Soleil',icon:'sun'},{name:'Lune',icon:'moon'},{name:'Mercure',icon:'mercury'},
-    {name:'Venus',icon:'venus'},{name:'Mars',icon:'mars'},{name:'Asterydes',icon:'asteroid'},
-    {name:'Jupiter',icon:'jupiter'},{name:'Saturne',icon:'saturn'},{name:'Uranus',icon:'uranus'},
-    {name:'Neptune',icon:'neptune'},{name:'Pluton',icon:'pluto'},{name:'Alpha',icon:'alpha'},
-    {name:'Axandans',icon:'terra'}
-  ];
-
-  let planeteHTML = '';
-  for (const p of planetNames) {
-    const body = BODIES.find(b=>b.name===p.name);
-    if (!body) continue;
-    const angle = bodyAngle(body, days);
-    const sect = SECTORS[sectorOf(angle)];
-    const deg = Math.round(angle % 30);
-    planeteHTML +=
-      '<div class="planete-item">' +
-        '<div class="pi-astre">' + p.name + '</div>' +
-        '<div class="pi-signe">' + sect + '</div>' +
-        '<div class="pi-deg">' + Math.round(angle) + '° (' + deg + '° dans le signe)</div>' +
-      '</div>';
+  const pNames = ['Soleil','Lune','Mercure','Venus','Mars','Asterydes',
+                  'Jupiter','Saturne','Uranus','Neptune','Pluton','Alpha','Axandans'];
+  let html = '';
+  for (const n of pNames) {
+    const b = BODIES.find(x=>x.name===n);
+    if (!b) continue;
+    const a = bodyAngle(b, days);
+    const s = SECTORS[sectorOf(a)];
+    const dg = Math.round(a%30);
+    html += '<div class="plan-item"><div class="pi-astre">'+n+'</div>'+
+            '<div class="pi-signe">'+s+'</div>'+
+            '<div class="pi-deg">'+Math.round(a)+'° ('+dg+'° dans le signe)</div></div>';
   }
-  document.getElementById('planeteGrid').innerHTML = planeteHTML;
+  document.getElementById('planGrid').innerHTML = html;
 
-  // Scroll to reading
-  setTimeout(() => {
-    document.getElementById('lectureSection').scrollIntoView({behavior:'smooth', block:'start'});
-  }, 400);
+  setTimeout(()=> sec.scrollIntoView({behavior:'smooth',block:'start'}), 100);
 }
-
-// Scroll reveal
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
-  });
-}, { threshold: 0.08 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
