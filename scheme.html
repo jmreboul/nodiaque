@@ -888,10 +888,11 @@ const DEFLUENCE_TEXTES = {
 };
 
 function computeScheme() {
-  // Run the standard compute()
   compute();
+  setTimeout(buildReading, 100);
+}
 
-  // Now build the personalized reading
+function buildReading() {
   const d = +document.getElementById('iDay').value;
   const m = +document.getElementById('iMonth').value;
   const y = +document.getElementById('iYear').value;
