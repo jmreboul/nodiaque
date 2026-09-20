@@ -120,6 +120,55 @@ footer a:hover{color:white;}
   .astre-picto{width:100%;min-width:unset;border-right:none;border-bottom:1px solid var(--border);
     padding:16px;flex-direction:row;gap:12px;}
 }
+
+/* ── Hamburger menu ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  background: none;
+  border: none;
+  z-index: 200;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+  transition: all .3s;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+@media (max-width: 720px) {
+  .hamburger { display: flex; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 56px;
+    left: 0; right: 0;
+    background: rgba(4,4,20,0.97);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(100,140,255,0.25);
+    flex-direction: column;
+    padding: 12px 16px 16px;
+    gap: 4px;
+    z-index: 99;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block;
+    padding: 10px 14px;
+    font-size: .8rem;
+    border-radius: 6px;
+  }
+  .nav-links a.cta { margin-left: 0; margin-top: 4px; }
+}
 </style>
 </head>
 <body>
@@ -129,6 +178,10 @@ footer a:hover{color:white;}
 
 <nav>
   <a href="index.html" class="nav-logo">✦ Noastrologie</a>
+  
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
   <ul class="nav-links">
     <li><a href="index.html">Accueil</a></li>
     <li><a href="signes.html">Les Signes</a></li>
@@ -149,6 +202,62 @@ footer a:hover{color:white;}
     <p>En dehors de l'Alpha, les Astres de la Noastrologie sont les équivalents des planètes du Système solaire, avec deux Astres qui lui sont propres : <strong>Terra</strong> parcourt le Nodiaque en une journée, <strong>Astérydes</strong> effectue une révolution complète en 7 ans. Les périodes de révolution des Astres sont des nombres premiers.</p>
     <p>Le Soleil parcourt le Nodiaque en une année, Terra en 24 heures, la Lune (29 jours), Mercure (89 jours), Vénus (223 jours), Mars (691 jours), Astérydes (7 ans), Jupiter (11 ans), Saturne (31 ans), Uranus (83 ans), Neptune (163 ans), Pluton (239 ans).</p>
     <p>Chaque Astre est associé à un Signe dont il est en <strong>maîtrise</strong>. On ne s'étonnera donc pas de retrouver des caractéristiques convergentes entre les Astres et les Signes dont ils sont maîtres.</p>
+  </div>
+</div>
+
+
+<!-- ── Les Éléments ── -->
+<div style="max-width:800px;margin:0 auto 40px;padding:0 24px;" class="reveal">
+  <div style="background:rgba(10,10,50,.7);border:1px solid rgba(100,140,255,.25);
+       border-radius:12px;padding:24px 28px;">
+    <h2 style="font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;
+        color:white;letter-spacing:.08em;margin-bottom:8px;">Les Éléments des Signes</h2>
+    <div style="width:40px;height:2px;background:linear-gradient(90deg,#d4a840,transparent);
+        margin:0 0 18px;"></div>
+    <p style="font-size:.92rem;line-height:1.85;color:#ddeeff;font-weight:300;margin-bottom:14px;">
+      Les éléments associés aux Signes se sont enrichis par rapport aux disciplines d'origine.
+      Outre l'air, l'eau, le feu et la terre, et le métal en astrologie chinoise, nous avons ici
+      <strong style="color:#f0c860;">12 éléments riches de sens</strong>.
+      On les retrouve dans les descriptifs des Signes.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;">
+      <span style="font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;padding:5px 14px;
+          border-radius:16px;border:1px solid rgba(100,140,255,.25);
+          background:rgba(15,15,100,.7);color:#f0c860;letter-spacing:.06em;">Cristal</span>
+      <span style="font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;padding:5px 14px;
+          border-radius:16px;border:1px solid rgba(100,140,255,.25);
+          background:rgba(15,15,100,.7);color:#aaccff;letter-spacing:.06em;">Pierre</span>
+      <span style="font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;padding:5px 14px;
+          border-radius:16px;border:1px solid rgba(100,140,255,.25);
+          background:rgba(15,15,100,.7);color:#aaccff;letter-spacing:.06em;">Parole</span>
+      <span style="font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;padding:5px 14px;
+          border-radius:16px;border:1px solid rgba(100,140,255,.25);
+          background:rgba(15,15,100,.7);color:#aaccff;letter-spacing:.06em;">Terre</span>
+      <span style="font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;padding:5px 14px;
+          border-radius:16px;border:1px solid rgba(100,140,255,.25);
+          background:rgba(15,15,100,.7);color:#aaccff;letter-spacing:.06em;">Métal</span>
+      <span style="font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;padding:5px 14px;
+          border-radius:16px;border:1px solid rgba(100,140,255,.25);
+          background:rgba(15,15,100,.7);color:#aaccff;letter-spacing:.06em;">Eau</span>
+      <span style="font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;padding:5px 14px;
+          border-radius:16px;border:1px solid rgba(100,140,255,.25);
+          background:rgba(15,15,100,.7);color:#aaccff;letter-spacing:.06em;">Sable</span>
+      <span style="font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;padding:5px 14px;
+          border-radius:16px;border:1px solid rgba(100,140,255,.25);
+          background:rgba(15,15,100,.7);color:#aaccff;letter-spacing:.06em;">Verre</span>
+      <span style="font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;padding:5px 14px;
+          border-radius:16px;border:1px solid rgba(100,140,255,.25);
+          background:rgba(15,15,100,.7);color:#aaccff;letter-spacing:.06em;">Bois</span>
+      <span style="font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;padding:5px 14px;
+          border-radius:16px;border:1px solid rgba(100,140,255,.25);
+          background:rgba(15,15,100,.7);color:#aaccff;letter-spacing:.06em;">Lumière</span>
+      <span style="font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;padding:5px 14px;
+          border-radius:16px;border:1px solid rgba(100,140,255,.25);
+          background:rgba(15,15,100,.7);color:#aaccff;letter-spacing:.06em;">Feu</span>
+      <span style="font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;padding:5px 14px;
+          border-radius:16px;border:1px solid rgba(100,140,255,.25);
+          background:rgba(15,15,100,.7);color:#aaccff;letter-spacing:.06em;">Air</span>
+    </div>
   </div>
 </div>
 
@@ -572,5 +681,22 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
+
+<script>
+function toggleMenu() {
+  const btn = document.getElementById('hamburger');
+  const nav = document.querySelector('.nav-links');
+  btn.classList.toggle('open');
+  nav.classList.toggle('open');
+}
+// Close menu when a link is clicked
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('hamburger').classList.remove('open');
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+</script>
+
 </body>
 </html>
