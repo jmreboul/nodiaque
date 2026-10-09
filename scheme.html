@@ -181,6 +181,17 @@ nav {
 .pi-astre { font-family:'Cinzel',serif; font-size:.72rem; font-weight:700; color:var(--gold); margin-bottom:2px; }
 .pi-signe { font-size:.82rem; color:var(--text-main); }
 .pi-deg { font-size:.7rem; color:var(--text-muted); }
+.portrait-box { text-align:center; margin-top:28px; padding:22px 18px;
+  border:1px solid rgba(212,168,64,.45); border-radius:14px; background:rgba(80,50,0,.25); }
+.portrait-box h3 { font-family:'Cinzel',serif; font-size:.95rem; color:var(--gold-light);
+  letter-spacing:.1em; margin-bottom:8px; }
+.portrait-box p { font-size:.86rem; color:var(--text-muted); font-style:italic; margin-bottom:6px; }
+.portrait-date { font-family:'Cinzel',serif; color:var(--gold); font-style:normal !important;
+  letter-spacing:.06em; margin-bottom:14px !important; }
+.portrait-btn { display:inline-block; font-family:'Cinzel',serif; font-size:.8rem; font-weight:700;
+  color:#d4a840; text-decoration:none; padding:9px 24px; border:1px solid rgba(212,168,64,.6);
+  border-radius:22px; background:rgba(80,50,0,.45); letter-spacing:.08em; transition:background .2s; }
+.portrait-btn:hover { background:rgba(80,50,0,.75); }
 .teissier-link { text-align:center; margin-top:20px; padding:18px;
   background:rgba(10,10,50,.5); border:1px solid var(--border); border-radius:10px; }
 .teissier-link p { font-size:.86rem; color:var(--text-muted); margin-bottom:10px; font-style:italic; }
@@ -321,6 +332,15 @@ nav {
     <h3>Position des Astres dans votre Schème</h3>
     <div class="plan-grid" id="planGrid"></div>
   </div>
+  <!-- Commande du portrait (lien Stripe avec date et heure du Schème) -->
+  <div class="portrait-box">
+    <h3>✦ Votre portrait Noastrologique</h3>
+    <p>Recevez par e-mail l'analyse complète et personnalisée de votre Schème.</p>
+    <p class="portrait-date" id="portraitDate"></p>
+    <a class="portrait-btn" id="portraitBtn" href="https://buy.stripe.com/5kQ28q82g16Rfr08rrfYY03"
+       target="_blank" rel="noopener">Commander mon portrait · 10 €</a>
+  </div>
+
   <div class="teissier-link">
     <p>Pour comprendre comment lire votre Schème, consultez notre exemple d'interprétation</p>
     <a href="teissier.html">Voir l'exemple Teissier →</a>
@@ -963,6 +983,14 @@ function buildReading() {
   const signData   = SIGN_DATA[sectorOf(sunAngle)];
   const fond       = FONDAMENTAUX[sunSector];
   const defl       = DEFLUENCES[sunSector];
+
+  // Lien de commande du portrait : date et heure transmises à Stripe
+  const p2 = n => String(n).padStart(2,'0');
+  document.getElementById('portraitDate').textContent =
+    'Pour une naissance le ' + p2(d) + '/' + p2(m) + '/' + y + ' à ' + p2(h) + 'h' + p2(mn);
+  document.getElementById('portraitBtn').href =
+    'https://buy.stripe.com/5kQ28q82g16Rfr08rrfYY03?client_reference_id=' +
+    y + '-' + p2(m) + '-' + p2(d) + '_' + p2(h) + 'h' + p2(mn);
 
   // Show section
   const sec = document.getElementById('lectureSection');
