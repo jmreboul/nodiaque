@@ -710,11 +710,11 @@ function compute(){
   chartEl.classList.add('animating');
   legendEl.classList.add('animating');
   cartEl.classList.add('animating');
-  const d =parseInt(document.getElementById('iDay').value)  ||6;
-  const m =parseInt(document.getElementById('iMonth').value)||1;
-  const y =parseInt(document.getElementById('iYear').value) ||1938;
-  const h =parseInt(document.getElementById('iHour').value) ||6;
-  const mn=parseInt(document.getElementById('iMin').value)  ||15;
+  const d =(isNaN(parseInt(document.getElementById('iDay').value)) ? 6 : parseInt(document.getElementById('iDay').value));
+  const m =(isNaN(parseInt(document.getElementById('iMonth').value)) ? 1 : parseInt(document.getElementById('iMonth').value));
+  const y =(isNaN(parseInt(document.getElementById('iYear').value)) ? 1938 : parseInt(document.getElementById('iYear').value));
+  const h =(isNaN(parseInt(document.getElementById('iHour').value)) ? 6 : parseInt(document.getElementById('iHour').value));
+  const mn=(isNaN(parseInt(document.getElementById('iMin').value)) ? 15 : parseInt(document.getElementById('iMin').value));
 
   const days=daysSince1901(d,m,y,h,mn);
   const results=BODIES.map(b=>({...b, angle:bodyAngle(b,days)}));
